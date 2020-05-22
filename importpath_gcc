@@ -1,0 +1,13 @@
+GCC="$(pwd)/usr"
+export __prefix="arm-buildroot-linux-gnueabihf"
+
+if [ -z "$(which "$__prefix-gcc")" ]; then
+  if [ -x "$GCC/bin/$__prefix-gcc" ]; then
+    export PATH="$GCC/bin:$PATH"
+    echo PATH="$PATH"
+  else
+    echo "$__prefix-gcc not found"
+  fi
+fi
+
+export PATH

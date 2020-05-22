@@ -13,4 +13,8 @@ COPY ipkg-0.99.163.tar.gz /root/buildroot-2015.11.1/dl/ipkg-0.99.163.tar.gz
 
 RUN make -C /root/buildroot-2015.11.1/
 
+COPY importpath_gcc /root/buildroot-2015.11.1/output/host
+COPY importpath_r16 /root/buildroot-2015.11.1/output/host
+COPY .bashrc /root/.bashrc
+
 CMD ["/bin/bash"]

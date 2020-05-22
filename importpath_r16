@@ -1,0 +1,44 @@
+if [ -z "$r16" ]; then
+
+export r16="$(pwd)/usr/$__prefix/sysroot/usr"
+export DESTDIR="$r16"
+export INCLUDE="-I$r16/include"
+export LIBS="-L$r16/lib"
+export CFLAGS="$INCLUDE"
+export CPPFLAGS="$INCLUDE"
+export CXXFLAGS="$INCLUDE"
+export LDFLAGS="$LIBS"
+export PKG_CONFIG_PATH="$r16/lib/pkgconfig"
+
+if true; then
+
+#export CROSS_COMPILE="$__prefix-"
+export CC="$__prefix-gcc"
+export CXX="$__prefix-g++"
+export AR="$__prefix-gcc-ar"
+export RANLIB="$__prefix-gcc-ranlib"
+
+export ac_cv_func_malloc_nonnull=yes
+export ac_cv_func_malloc_0_nonnull=yes
+export ac_cv_func_realloc_nonnull=yes
+export ac_cv_func_realloc_0_nonnull=yes
+export ac_cv_func_lstat_nonnull=yes
+export ac_cv_func_lstat_0_nonnull=yes
+
+export CFLAGS="-Ofast \
+  -flto=8 -fwhole-program -fuse-linker-plugin -fipa-pta \
+  -fdata-sections -ffunction-sections -Wl,--gc-sections \
+  -fno-stack-protector -fno-ident -fomit-frame-pointer \
+  -falign-functions=1 -falign-jumps=1 -falign-loops=1 \
+  -fno-unwind-tables -fno-asynchronous-unwind-tables \
+  -fmerge-all-constants -fno-math-errno \
+  -marm -march=armv7ve -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard"
+
+export CPPFLAGS="$CFLAGS"
+export CXXFLAGS="$CFLAGS"
+
+fi
+
+echo "$r16"
+
+fi
