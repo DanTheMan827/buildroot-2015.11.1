@@ -18,6 +18,9 @@ RUN make -C /root/buildroot-2015.11.1/
 FROM debian:latest
 COPY --from=0 /root/buildroot-2015.11.1 /root/buildroot-2015.11.1
 
+RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+RUN apt-get update && apt-get upgrade -y && apt-get install wget curl command-not-found nano vim gcc g++ make git cpio python unzip rsync bc subversion locales build-essential -y && apt-get clean
+
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
 COPY importpath_r16 /root/buildroot-2015.11.1/output/host
