@@ -1,3 +1,4 @@
+# Build with old debian because buildroot won't on newer
 FROM debian:jessie
 
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
@@ -13,6 +14,11 @@ COPY ipkg-0.99.163.tar.gz /root/buildroot-2015.11.1/dl/ipkg-0.99.163.tar.gz
 
 RUN make -C /root/buildroot-2015.11.1/
 
+# Use new debian and copy the built buildroot from the previous stage
+FROM debian:latest
+COPY --from=0 /root/buildroot-2015.11.1 /root/buildroot-2015.11.1
+
+# Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
 COPY importpath_r16 /root/buildroot-2015.11.1/output/host
 COPY .bashrc /root/.bashrc
