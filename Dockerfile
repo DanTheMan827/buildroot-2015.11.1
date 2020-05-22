@@ -23,8 +23,8 @@ RUN sed -Ee 's#^prefix=/usr$#prefix="/root/buildroot-2015.11.1/output/host/usr/a
 
 # Update apt, install packages, and update command-not-found data
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-RUN apt-get update && apt-get upgrade -y && apt-get install wget curl command-not-found nano vim gcc g++ make git cpio python unzip rsync bc subversion locales build-essential -y && apt-get clean
-RUN update-command-not-found
+RUN apt-get update && apt-get upgrade -y && apt-get install wget curl command-not-found nano vim gcc g++ make git cpio python unzip rsync bc subversion locales build-essential bsdmainutils libaudiofile-dev -y && apt-get clean
+RUN apt update && update-command-not-found
 
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
