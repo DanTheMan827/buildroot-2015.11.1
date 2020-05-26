@@ -26,6 +26,8 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 RUN apt-get update && apt-get upgrade -y && apt-get install wget curl command-not-found nano vim gcc g++ make git cpio python unzip rsync bc subversion locales build-essential bsdmainutils libaudiofile-dev -y && apt-get clean
 RUN apt update && update-command-not-found
 
+RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen
+
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
 COPY importpath_r16 /root/buildroot-2015.11.1/output/host
