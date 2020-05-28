@@ -59,6 +59,16 @@ RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O 
     cd /root && \
     rm -rf /root/attr-2.4.48/
 
+# Install bluez
+COPY bluez-5.54-sixaxis-auto.tar.gz /root/bluez-5.54-sixaxis-auto.tar.gz
+RUN tar -xzvf /root/bluez-5.54-sixaxis-auto.tar.gz -C /root && \
+    cd /root/bluez-5.54-sixaxis-auto && \
+    ./bootstrap && \
+    ./configure --host=arm-buildroot-linux-gnueabihf --prefix=/usr --disable-systemd --disable-cups --disable-obex --enable-library --enable-static --enable-sixaxis --exec-prefix=/usr --enable-deprecated &&  \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
+    cd /root && \
+    rm -rf /root/bluez-5.54-sixaxis-auto*
+
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
 COPY importpath_r16 /root/buildroot-2015.11.1/output/host
