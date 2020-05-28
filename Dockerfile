@@ -40,7 +40,7 @@ RUN git clone https://github.com/signal11/hidapi.git /root/hidapi && \
     cd /root/hidapi && \
     ./bootstrap && \
     ./configure --prefix=/usr --host=arm-buildroot-linux-gnueabihf && \
-    make install DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
     cd /root && rm -rf /root/hidapi
 
 # Install dbus
