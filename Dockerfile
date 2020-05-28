@@ -29,7 +29,19 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 RUN apt-get update && apt-get upgrade -y && apt-get install wget curl command-not-found nano vim gcc g++ make git cpio python unzip rsync bc subversion locales build-essential bsdmainutils libaudiofile-dev -y && apt-get clean
 RUN apt update && update-command-not-found
 
+# Generate locale
 RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && locale-gen
+
+# Set path
+ENV PATH /root/buildroot-2015.11.1/output/host/usr/bin:$PATH
+
+# Install hidapi
+RUN git clone https://github.com/signal11/hidapi.git /root/hidapi && \
+    cd /root/hidapi && \
+    ./bootstrap && \
+    ./configure --prefix=/usr --host=arm-buildroot-linux-gnueabihf && \
+    make install DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
+    cd /root && rm -rf /root/hidapi
 
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
