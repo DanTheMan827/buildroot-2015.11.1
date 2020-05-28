@@ -43,6 +43,14 @@ RUN git clone https://github.com/signal11/hidapi.git /root/hidapi && \
     make install DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
     cd /root && rm -rf /root/hidapi
 
+# Install dbus
+RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -O - | tar -xzvf - -C /root && \
+    cd /root/dbus-1.12.16/ && \
+    CC=arm-buildroot-linux-gnueabihf-gcc ./configure --prefix=/usr --host=arm-buildroot-linux-gnueabihf && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
+    cd /root && \
+    rm -rf /root/dbus-1.12.16
+
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
 COPY importpath_r16 /root/buildroot-2015.11.1/output/host
