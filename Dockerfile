@@ -26,7 +26,7 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
     locale-gen
 
-ADD buildroot-2015.11.1.tar.gz /root
+ADD buildroot-2015.11.1.tar.gz /
 
 COPY [".config", "/buildroot-2015.11.1/"]
 COPY ["icu4c-56_1-src.tgz", "ipkg-0.99.163.tar.gz", "/buildroot-2015.11.1/dl/"]
@@ -89,45 +89,45 @@ ENV SYSROOT $BUILDROOT/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot
 ENV PATH $BUILDROOT/output/host/usr/bin:$PATH
 
 # Install hidapi
-RUN git clone "https://github.com/signal11/hidapi.git" "/root/hidapi" && \
-    cd "/root/hidapi" && \
+RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
+    cd "/tmp/hidapi" && \
     ./bootstrap && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
-    cd "/root" && rm -rf "/root/hidapi"
+    cd "/tmp" && rm -rf "/tmp/hidapi"
 
 # Install dbus
-RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -O - | tar -xzvf - -C "/root" && \
-    cd "/root/dbus-1.12.16/" && \
+RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/dbus-1.12.16/" && \
     "CC=arm-buildroot-linux-gnueabihf-gcc" ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
-    cd "/root" && \
-    rm -rf "/root/dbus-1.12.16"
+    cd "/tmp" && \
+    rm -rf "/tmp/dbus-1.12.16"
 
 # Install attr
-RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O - | tar -xzvf - -C "/root" && \
-    cd "/root/attr-2.4.48/" && \
+RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/attr-2.4.48/" && \
     ./configure "--prefix=/usr" "--disable-static" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
-    cd "/root" && \
-    rm -rf "/root/attr-2.4.48/"
+    cd "/tmp" && \
+    rm -rf "/tmp/attr-2.4.48/"
 
 # Install bluez
-ADD bluez-5.54-sixaxis-auto.tar.gz /root
-RUN cd "/root/bluez-5.54-sixaxis-auto" && \
+ADD bluez-5.54-sixaxis-auto.tar.gz /tmp
+RUN cd "/tmp/bluez-5.54-sixaxis-auto" && \
     ./bootstrap && \
     ./configure "--host=arm-buildroot-linux-gnueabihf" "--prefix=/usr" "--disable-systemd" "--disable-cups" "--disable-obex" "--enable-library" "--enable-static" "--enable-sixaxis" "--exec-prefix=/usr" "--enable-deprecated" &&  \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
-    cd "/root" && \
-    rm -rf "/root/bluez-5.54-sixaxis-auto/"
+    cd "/tmp" && \
+    rm -rf "/tmp/bluez-5.54-sixaxis-auto/"
 
 # Install SDL2 Mixer
-RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz" -O - | tar -xzvf - -C "/root" && \
-    cd "/root/SDL2_mixer-2.0.1/" && \
+RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_mixer-2.0.1/" && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
-    cd "/root" && \
-    rm -rf "/root/SDL2_mixer-2.0.1/"
+    cd "/tmp" && \
+    rm -rf "/tmp/SDL2_mixer-2.0.1/"
 
 # Setup environment
 COPY ["importpath_gcc", "importpath_r16", "/buildroot-2015.11.1/output/host/"]
