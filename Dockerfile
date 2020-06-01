@@ -31,9 +31,6 @@ ADD buildroot-2015.11.1.tar.gz /
 COPY [".config", "/buildroot-2015.11.1/"]
 COPY ["icu4c-56_1-src.tgz", "ipkg-0.99.163.tar.gz", "/buildroot-2015.11.1/dl/"]
 
-RUN echo "MESA3D_CONF_OPTS += --disable-static" | cat - "/buildroot-2015.11.1/package/mesa3d/mesa3d.mk" > "/root/mesa3d.mk" && \
-    mv "/root/mesa3d.mk" "/buildroot-2015.11.1/package/mesa3d/mesa3d.mk"
-
 RUN make -C "/buildroot-2015.11.1/"
 
 # Use new debian and copy the built buildroot from the previous stage
