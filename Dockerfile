@@ -69,6 +69,14 @@ RUN tar -xzvf /root/bluez-5.54-sixaxis-auto.tar.gz -C /root && \
     cd /root && \
     rm -rf /root/bluez-5.54-sixaxis-auto*
 
+# Install SDL2 Mixer
+RUN wget https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz -O - | tar -xzvf - -C /root && \
+    cd /root/SDL2_mixer-2.0.1/ && \
+    ./configure --prefix=/usr --host=arm-buildroot-linux-gnueabihf && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" DESTDIR=/root/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/ && \
+    cd /root && \
+    rm -rf /root/SDL2_mixer-2.0.1/
+
 # Setup environment
 COPY importpath_gcc /root/buildroot-2015.11.1/output/host
 COPY importpath_r16 /root/buildroot-2015.11.1/output/host
