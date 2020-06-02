@@ -31,14 +31,11 @@ ADD buildroot-2015.11.1.tar.gz /
 COPY [".config", "/buildroot-2015.11.1/"]
 COPY ["icu4c-56_1-src.tgz", "ipkg-0.99.163.tar.gz", "/buildroot-2015.11.1/dl/"]
 
-RUN make -C "/buildroot-2015.11.1/"
+RUN make -C "/buildroot-2015.11.1/" && chmod -R a=u "/buildroot-2015.11.1"
 
 # Use new debian and copy the built buildroot from the previous stage
 FROM debian:latest
 COPY --from=0 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
-
-# Copy owner permissions to all
-RUN chmod -R a=u "/buildroot-2015.11.1"
 
 # Create a sdl2-config patched to the sysroot that buildroot built
 RUN sed \
