@@ -143,9 +143,9 @@ COPY --from=builder3 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroo
 # Create arm-linux symlinks
 RUN cd /buildroot-2015.11.1/output/host/usr/bin && \
     ls -1 arm-buildroot-linux-gnueabihf-* | while read line; do \
-      ln -s "$line" "`echo -n $line | sed -e 's#^arm-buildroot-linux-gnueabihf#arm-linux#'`"; \
-    done; \
-    exit 0
+      newname="`echo -n $line | sed -e 's#^arm-buildroot-linux-gnueabihf#arm-linux#'`"; \
+      [ ! -e "$newname" ] && ln -s "$line" "$newname"; \
+    done
 
 # Setup environment
 COPY ["retrolink", "/buildroot-2015.11.1/output/host/usr/bin"]
