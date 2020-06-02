@@ -87,6 +87,7 @@ ENV PATH $BUILDROOT/output/host/usr/bin:$PATH
 
 # Copy toolchain.cmake
 COPY "toolchain.cmake" "/buildroot-2015.11.1"
+RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
 
 # Install hidapi
 RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
