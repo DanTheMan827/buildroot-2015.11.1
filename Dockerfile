@@ -1,5 +1,5 @@
 # Build with old debian because buildroot won't on newer
-FROM debian:jessie
+FROM debian:jessie as builder1
 
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
     apt-get update && \
@@ -34,7 +34,7 @@ COPY ["icu4c-56_1-src.tgz", "ipkg-0.99.163.tar.gz", "/buildroot-2015.11.1/dl/"]
 RUN make -C "/buildroot-2015.11.1/" && chmod -R a=u "/buildroot-2015.11.1"
 
 # Use new debian and copy the built buildroot from the previous stage
-FROM debian:latest
+FROM debian:latest as builder2
 COPY --from=0 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
 
 # Create a sdl2-config patched to the sysroot that buildroot built
@@ -86,12 +86,16 @@ ENV PATH $BUILDROOT/output/host/usr/bin:$PATH
 COPY "toolchain.cmake" "/buildroot-2015.11.1"
 RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
 
+FROM builder2 as builder3
+RUN mkdir /staging/
+
 # Install hidapi
 RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
     cd "/tmp/hidapi" && \
     ./bootstrap && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && rm -rf "/tmp/hidapi"
 
 # Install dbus
@@ -99,6 +103,7 @@ RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -O - |
     cd "/tmp/dbus-1.12.16/" && \
     ./configure CC=arm-buildroot-linux-gnueabihf-gcc "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/dbus-1.12.16"
 
@@ -107,6 +112,7 @@ RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O 
     cd "/tmp/attr-2.4.48/" && \
     ./configure "--prefix=/usr" "--disable-static" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/attr-2.4.48/"
 
@@ -116,6 +122,7 @@ RUN cd "/tmp/bluez-5.54-sixaxis-auto" && \
     ./bootstrap && \
     ./configure "--host=arm-buildroot-linux-gnueabihf" "--prefix=/usr" "--disable-systemd" "--disable-cups" "--disable-obex" "--enable-library" "--enable-static" "--enable-sixaxis" "--exec-prefix=/usr" "--enable-deprecated" &&  \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/bluez-5.54-sixaxis-auto/"
 
@@ -124,8 +131,14 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
     cd "/tmp/SDL2_mixer-2.0.1/" && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
+
+RUN chmod -R a=u "/staging/"
+
+FROM builder2
+COPY --from=builder3 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/.
 
 # Create arm-linux symlinks
 RUN cd /buildroot-2015.11.1/output/host/usr/bin && \
