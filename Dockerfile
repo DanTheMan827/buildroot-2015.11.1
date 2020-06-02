@@ -129,6 +129,13 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
     cd "/tmp" && \
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
 
+# Create arm-linux symlinks
+RUN cd /buildroot-2015.11.1/output/host/usr/bin && \
+    ls -1 arm-buildroot-linux-gnueabihf-* | while read line; do \
+      ln -s "$line" "`echo -n $line | sed -e 's#^arm-buildroot-linux-gnueabihf#arm-linux#'`"; \
+    done; \
+    exit 0
+
 # Setup environment
 COPY ["retrolink", "/buildroot-2015.11.1/output/host/usr/bin"]
 COPY ["importpath_gcc", "importpath_r16", "/buildroot-2015.11.1/output/host/"]
