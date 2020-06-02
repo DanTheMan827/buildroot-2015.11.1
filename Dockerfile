@@ -130,6 +130,7 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
 
 # Setup environment
+COPY ["retrolink", "/buildroot-2015.11.1/output/host/usr/bin"]
 COPY ["importpath_gcc", "importpath_r16", "/buildroot-2015.11.1/output/host/"]
 COPY [".bashrc", "/root/"]
 

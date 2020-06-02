@@ -1,0 +1,22 @@
+#!/bin/bash
+#RetroLink - Allows a library or executable to link to any symbols, without version restrictions
+#Usage: ./retrolink foobar_libretro.so
+#http://www.lightofdawn.org/wiki/wiki.cgi/NewAppsOnOldGlibc
+
+SO="$1"
+[ -z "$SO" ] && SO="$(ls *.so | head -n1)"
+[ -z "${__prefix}" ] || CROSS_COMPILE="${__prefix}-"
+
+readelf="${CROSS_COMPILE}readelf"
+strip="${CROSS_COMPILE}strip"
+"$strip" --strip-unneeded "$SO"
+
+#chmod 644 "$SO"
+
+start="$("$readelf" -V "$SO" | grep -A1 .gnu.version_r | tail -n1 | cut -d' ' -f6)"
+pos="$("$readelf" -V "$SO" | grep 'Flags: none' | cut -d' ' -f3 | sed 's/://')"
+#echo "$start"
+for pos in $pos; do
+  echo "$pos"
+  printf '\x02' | dd if=/dev/stdin of="$SO" seek=$((start+pos+4)) count=1 bs=1 conv=notrunc status=none
+done
