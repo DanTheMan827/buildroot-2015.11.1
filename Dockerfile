@@ -138,7 +138,7 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
 RUN chmod -R a=u "/staging/"
 
 FROM builder2
-COPY --from=builder3 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/.
+COPY --from=builder3 /staging/* /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 
 # Create arm-linux symlinks
 RUN cd /buildroot-2015.11.1/output/host/usr/bin && \
