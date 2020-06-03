@@ -94,7 +94,7 @@ RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
     cd "/tmp/hidapi" && \
     ./bootstrap && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
-    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && rm -rf "/tmp/hidapi"
 
@@ -102,7 +102,7 @@ RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
 RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/dbus-1.12.16/" && \
     ./configure CC=arm-buildroot-linux-gnueabihf-gcc "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
-    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/dbus-1.12.16"
@@ -111,7 +111,7 @@ RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -O - |
 RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/attr-2.4.48/" && \
     ./configure "--prefix=/usr" "--disable-static" "--host=arm-buildroot-linux-gnueabihf" && \
-    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/attr-2.4.48/"
@@ -121,7 +121,7 @@ ADD bluez-5.54-sixaxis-auto.tar.gz /tmp
 RUN cd "/tmp/bluez-5.54-sixaxis-auto" && \
     ./bootstrap && \
     ./configure "--host=arm-buildroot-linux-gnueabihf" "--prefix=/usr" "--disable-systemd" "--disable-cups" "--disable-obex" "--enable-library" "--enable-static" "--enable-sixaxis" "--exec-prefix=/usr" "--enable-deprecated" &&  \
-    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/bluez-5.54-sixaxis-auto/"
@@ -130,10 +130,22 @@ RUN cd "/tmp/bluez-5.54-sixaxis-auto" && \
 RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/SDL2_mixer-2.0.1/" && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
-    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
+
+# Install gl4es
+RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xzvf - -C /tmp && \
+    mkdir -p /tmp/gl4es-1.1.2/build/ && \
+    cd /tmp/gl4es-1.1.2/build/ && \
+    cmake .. -DCMAKE_TOOLCHAIN_FILE=/buildroot-2015.11.1/toolchain.cmake -DNOX11=ON -DNOEGL=ON -DSTATICLIB=ON && \
+    make "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    mkdir -p "/staging/usr/lib/" && \
+    cp lib/libGL.a "$SYSROOT/" && \
+    cp lib/libGL.a "/staging/usr/lib/" && \
+    cd /tmp && \
+    rm -rf "/tmp/gl4es-1.1.2/"
 
 RUN chmod -R a=u "/staging/" && find /staging/
 
