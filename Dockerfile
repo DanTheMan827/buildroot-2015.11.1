@@ -135,7 +135,7 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
     cd "/tmp" && \
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
 
-RUN chmod -R a=u "/staging/"
+RUN chmod -R a=u "/staging/" && find /staging/
 
 FROM builder2
 COPY --from=builder3 /staging/* /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
