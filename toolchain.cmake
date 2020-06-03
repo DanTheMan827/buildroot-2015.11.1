@@ -4,7 +4,7 @@ set(CMAKE_SYSTEM_PROCESSOR armv7)
 set(CMAKE_SYSROOT /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot)
 #set(CMAKE_STAGING_PREFIX /home/devel/stage)
 
-set(tools /root/buildroot-2015.11.1/output/host/usr)
+set(tools /buildroot-2015.11.1/output/host/usr)
 set(CMAKE_C_COMPILER ${tools}/bin/arm-buildroot-linux-gnueabihf-gcc)
 set(CMAKE_CXX_COMPILER ${tools}/bin/arm-buildroot-linux-gnueabihf-g++)
 set(CMAKE_AR ${tools}/bin/arm-buildroot-linux-gnueabihf-gcc-ar CACHE PATH "" FORCE)
