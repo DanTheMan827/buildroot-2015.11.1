@@ -145,7 +145,7 @@ RUN cd /buildroot-2015.11.1/output/host/usr/bin && \
     ls -1 arm-buildroot-linux-gnueabihf-* | while read line; do \
       newname="`echo -n $line | sed -e 's#^arm-buildroot-linux-gnueabihf#arm-linux#'`"; \
       [ ! -e "$newname" ] && ln -s "$line" "$newname"; \
-    done
+    done; exit 0
 
 # Setup environment
 COPY ["retrolink", "/buildroot-2015.11.1/output/host/usr/bin"]
