@@ -87,7 +87,7 @@ COPY "toolchain.cmake" "/buildroot-2015.11.1"
 RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
 
 FROM builder2 as builder3
-RUN mkdir /staging/
+RUN mkdir -p /staging/usr/
 
 # Install hidapi
 RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
