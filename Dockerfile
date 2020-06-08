@@ -135,6 +135,15 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
     cd "/tmp" && \
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
 
+# Install Freetype
+RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/freetype-2.10.2/" && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
+    cd "/tmp" && \
+    rm -rf "/tmp/freetype-2.10.2/"
+
 # Install gl4es
 RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xzvf - -C /tmp && \
     mkdir -p /tmp/gl4es-1.1.2/build/ && \
