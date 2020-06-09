@@ -68,7 +68,8 @@ RUN apt-get update && \
         locales \
         build-essential \
         bsdmainutils \
-        libaudiofile-dev && \
+        libaudiofile-dev \
+        upx && \
     apt-get clean && \
     apt update && \
     update-command-not-found
