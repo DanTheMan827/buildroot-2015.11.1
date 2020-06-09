@@ -135,6 +135,15 @@ RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar
     cd "/tmp" && \
     rm -rf "/tmp/SDL2_mixer-2.0.1/"
 
+# Install SDL2 Image
+RUN wget "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_image-2.0.1/" && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
+    cd "/tmp" && \
+    rm -rf "/tmp/SDL2_image-2.0.1/"
+
 # Install Freetype
 RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/freetype-2.10.2/" && \
