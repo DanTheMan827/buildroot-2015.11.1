@@ -165,6 +165,12 @@ RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xz
     cp lib/libGL.a "/staging/usr/lib/" && \
     cd /tmp && \
     rm -rf "/tmp/gl4es-1.1.2/"
+    
+# Install zstd
+RUN git clone "https://github.com/facebook/zstd.git" "/tmp/zstd" && \
+    cd "/tmp/zstd/lib" && \
+    make install CC=arm-buildroot-linux-gnueabihf-gcc "DESTDIR=$SYSROOT" PREFIX=/usr "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    cd "/tmp" && rm -rf "/tmp/zstd"
 
 RUN chmod -R a=u "/staging/" && find /staging/
 
