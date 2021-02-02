@@ -148,7 +148,7 @@ RUN wget "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.tar
 # Install Freetype
 RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/freetype-2.10.2/" && \
-    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" --enable-freetype-config && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
