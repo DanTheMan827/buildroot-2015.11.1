@@ -151,8 +151,18 @@ RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.ta
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" --enable-freetype-config && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
+    cp "$SYSROOT/usr/bin/freetype-config" /buildroot-2015.11.1/output/host/usr/bin/freetype-config && \
     cd "/tmp" && \
     rm -rf "/tmp/freetype-2.10.2/"
+
+# Install SDL2_ttf
+RUN wget "https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.12.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_ttf-2.0.12/" && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging" && \
+    cd "/tmp" && \
+    rm -rf "/tmp/SDL2_ttf-2.0.12/"
 
 # Install gl4es
 RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xzvf - -C /tmp && \
