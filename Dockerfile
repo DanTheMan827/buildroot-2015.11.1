@@ -176,6 +176,7 @@ RUN chmod -R a=u "/staging/" && find /staging/
 
 FROM builder2
 COPY --from=builder3 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
+RUN mv "$SYSROOT/usr/bin/freetype-config" /buildroot-2015.11.1/output/host/usr/bin/freetype-config
 
 # Create arm-linux symlinks
 RUN cd /buildroot-2015.11.1/output/host/usr/bin && \
