@@ -1,0 +1,63 @@
+From 0cf38c7496e6ae7c0e2eb2226504c631d50fc7e7 Mon Sep 17 00:00:00 2001
+From: Jools Wills <buzz@exotica.org.uk>
+Date: Fri, 17 Feb 2017 17:16:05 +0000
+Subject: [PATCH 2/8] packaging fixes -  * updated debian/control to match
+ debian/ubuntu package names  * fix libudev dependency  * rename
+ libsdl2.install -> libsdl2-2.0-0.install
+
+---
+ debian/control                                    | 12 ++++++------
+ debian/{libsdl2.install => libsdl2-2.0-0.install} |  0
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ rename debian/{libsdl2.install => libsdl2-2.0-0.install} (100%)
+
+diff --git a/debian/control b/debian/control
+index a3411335a..a6b9b5e32 100644
+--- a/debian/control
++++ b/debian/control
+@@ -30,16 +30,16 @@ Build-Depends: debhelper (>= 9),
+                libxxf86vm-dev
+ Homepage: http://www.libsdl.org/
+ 
+-Package: libsdl2
++Package: libsdl2-2.0-0
+ Architecture: any
+ Multi-Arch: same
+ Pre-Depends: ${misc:Pre-Depends}
+ Depends: ${misc:Depends},
+          ${shlibs:Depends},
+-         libudev0 [linux-any],
++         libudev0 | libudev1 [linux-any],
+          libdbus-1-3 [linux-any]
+-Conflicts: libsdl-1.3-0
+-Replaces: libsdl-1.3-0
++Conflicts: libsdl-1.3-0, libsdl2
++Replaces: libsdl-1.3-0, libsdl2
+ Description: Simple DirectMedia Layer
+  SDL is a library that allows programs portable low level access to
+  a video framebuffer, audio output, mouse, and keyboard.
+@@ -51,7 +51,7 @@ Section: libdevel
+ Architecture: any
+ Multi-Arch: same
+ Depends: ${misc:Depends},
+-         libsdl2 (= ${binary:Version}),
++         libsdl2-2.0-0 (= ${binary:Version}),
+          libc6-dev,
+          libgl1-mesa-dev
+ Conflicts: libsdl-1.3-dev
+@@ -68,7 +68,7 @@ Section: debug
+ Architecture: any
+ Multi-Arch: same
+ Depends: ${misc:Depends},
+-         libsdl2 (= ${binary:Version}),
++         libsdl2-2.0-0 (= ${binary:Version}),
+ Description: Simple DirectMedia Layer debug files
+  SDL is a library that allows programs portable low level access to a video
+  framebuffer, audio output, mouse, and keyboard.
+diff --git a/debian/libsdl2.install b/debian/libsdl2-2.0-0.install
+similarity index 100%
+rename from debian/libsdl2.install
+rename to debian/libsdl2-2.0-0.install
+-- 
+2.20.1
+

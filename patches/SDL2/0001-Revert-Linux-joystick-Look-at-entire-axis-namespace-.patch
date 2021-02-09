@@ -1,0 +1,40 @@
+From 699f05eb5cac7be977d10752a72cff24f7a4aa6e Mon Sep 17 00:00:00 2001
+From: Jools Wills <buzz@exotica.org.uk>
+Date: Sat, 9 Apr 2016 22:07:12 +0100
+Subject: [PATCH 1/8] Revert "Linux joystick: Look at entire axis namespace for
+ controls (thanks, "spaz16"!)."
+
+This reverts commit 4cb7923f251543c1175c1702f8cf8b4201ce9054.
+
+see https://github.com/RetroPie/RetroPie-Setup/issues/1297
+---
+ src/joystick/linux/SDL_sysjoystick.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/joystick/linux/SDL_sysjoystick.c b/src/joystick/linux/SDL_sysjoystick.c
+index ee4a8c197..f0f4204c3 100644
+--- a/src/joystick/linux/SDL_sysjoystick.c
++++ b/src/joystick/linux/SDL_sysjoystick.c
+@@ -870,7 +870,7 @@ ConfigJoystick(SDL_Joystick *joystick, int fd)
+                 ++joystick->nbuttons;
+             }
+         }
+-        for (i = 0; i < ABS_MAX; ++i) {
++        for (i = 0; i < ABS_MISC; ++i) {
+             /* Skip hats */
+             if (i == ABS_HAT0X) {
+                 i = ABS_HAT3Y;
+@@ -1248,6 +1248,10 @@ HandleInputEvents(SDL_Joystick *joystick)
+                                           events[i].value);
+                 break;
+             case EV_ABS:
++                if (code >= ABS_MISC) {
++                    break;
++                }
++
+                 switch (code) {
+                 case ABS_HAT0X:
+                 case ABS_HAT0Y:
+-- 
+2.20.1
+

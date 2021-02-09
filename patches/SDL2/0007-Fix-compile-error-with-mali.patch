@@ -1,0 +1,47 @@
+From c4191dd9c298a26c5f9514792d96edd3ae290d39 Mon Sep 17 00:00:00 2001
+From: DanTheMan827 <790119+DanTheMan827@users.noreply.github.com>
+Date: Tue, 9 Feb 2021 18:39:00 +0000
+Subject: [PATCH 7/8] Fix compile error with mali
+
+---
+ src/video/mali-fbdev/SDL_malivideo.c | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/src/video/mali-fbdev/SDL_malivideo.c b/src/video/mali-fbdev/SDL_malivideo.c
+index 1d076a68d..4b843b052 100644
+--- a/src/video/mali-fbdev/SDL_malivideo.c
++++ b/src/video/mali-fbdev/SDL_malivideo.c
+@@ -37,13 +37,6 @@
+ #include "SDL_malivideo.h"
+ #include "SDL_maliopengles.h"
+ 
+-
+-static int
+-MALI_Available(void)
+-{
+-    return 1;
+-}
+-
+ static void
+ MALI_Destroy(SDL_VideoDevice * device)
+ {
+@@ -105,7 +98,6 @@ MALI_Create()
+ VideoBootStrap MALI_bootstrap = {
+     "mali",
+     "Mali EGL Video Driver",
+-    MALI_Available,
+     MALI_Create
+ };
+ 
+@@ -165,7 +157,7 @@ MALI_VideoInit(_THIS)
+     display.current_mode = current_mode;
+     display.driverdata = data;
+ 
+-    SDL_AddVideoDisplay(&display);
++    SDL_AddVideoDisplay(&display, SDL_FALSE);
+ 
+ #ifdef SDL_INPUT_LINUXEV
+     if (SDL_EVDEV_Init() < 0) {
+-- 
+2.20.1
+

@@ -83,12 +83,69 @@ ENV BUILDROOT /buildroot-2015.11.1
 ENV SYSROOT $BUILDROOT/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot
 ENV PATH $BUILDROOT/output/host/usr/bin:$PATH
 
+# Set git identity
+RUN git config --global user.email "dockerfile@example.com" && \
+    git config --global user.name "Dockerfile"
+
 # Copy toolchain.cmake
 COPY "toolchain.cmake" "/buildroot-2015.11.1"
 RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
 
+# Copy new GL headers
+RUN rm -rf "$SYSROOT/usr/include/EGL" "$SYSROOT/usr/include/GLES" "$SYSROOT/usr/include/GLES2" "$SYSROOT/usr/include/KHR"
+COPY "gl_headers" "$SYSROOT/usr/include/"
+
+# Set up builder3
 FROM builder2 as builder3
-RUN mkdir -p /staging/usr/
+RUN mkdir -p /staging/usr/include/
+
+# Copy patches
+COPY "patches/" "/patches"
+
+# Install gl4es
+RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xzvf - -C /tmp && \
+    mkdir -p /tmp/gl4es-1.1.2/build/ && \
+    cd /tmp/gl4es-1.1.2/build/ && \
+    cmake .. -DCMAKE_TOOLCHAIN_FILE=/buildroot-2015.11.1/toolchain.cmake -DNOX11=ON -DNOEGL=ON -DSTATICLIB=ON && \
+    make "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    mkdir -p "/staging/usr/lib/" && \
+    cp lib/libGL.a "$SYSROOT/" && \
+    cp lib/libGL.a "/staging/usr/lib/" && \
+    cd /tmp && \
+    rm -rf "/tmp/gl4es-1.1.2/"
+
+# Install SDL2
+RUN cd /tmp && \
+    git clone "https://github.com/sdl-mirror/SDL.git" && \
+    cd SDL && \
+    git checkout 5c829aac66a491b9d23b12f4c37bf896dc11f3a8 && \
+    git am /patches/SDL2/* && \
+    ./configure \
+      --disable-video-rpi \
+      --disable-video-x11-xcursor \
+      --disable-video-x11-xinerama \
+      --disable-video-x11-xinput \
+      --disable-video-x11-xrandr \
+      --disable-video-x11-scrnsaver \
+      --disable-video-x11-vm \
+      --disable-video-x11 \
+      --without-x \
+      --disable-video-opengl \
+      --enable-video-opengles \
+      --disable-video-vulkan \
+      --disable-oss \
+      --enable-alsa \
+      --enable-alsa-shared \
+      --enable-video-mali \
+      --disable-dbus \
+      --disable-video-kmsdrm \
+      --enable-arm-simd \
+      --enable-arm-neon \
+      --host=arm-buildroot-linux-gnueabihf \
+      --prefix=/usr && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
+    cd "/tmp" && rm -rf "/tmp/SDL-mirror"
 
 # Install hidapi
 RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
@@ -156,32 +213,30 @@ RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.ta
     rm -rf "/tmp/freetype-2.10.2/"
 
 # Install SDL2_ttf
-RUN wget "https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.12.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
-    cd "/tmp/SDL2_ttf-2.0.12/" && \
-    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
+RUN wget "https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_ttf-2.0.14/" && \
+    sed -i "s#SDL_opengl.h#GL/GL.h#g" configure && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" --without-gl && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging" && \
     cd "/tmp" && \
-    rm -rf "/tmp/SDL2_ttf-2.0.12/"
+    rm -rf "/tmp/SDL2_ttf-2.0.14/"
 
-# Install gl4es
-RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xzvf - -C /tmp && \
-    mkdir -p /tmp/gl4es-1.1.2/build/ && \
-    cd /tmp/gl4es-1.1.2/build/ && \
-    cmake .. -DCMAKE_TOOLCHAIN_FILE=/buildroot-2015.11.1/toolchain.cmake -DNOX11=ON -DNOEGL=ON -DSTATICLIB=ON && \
-    make "-j$(grep -c ^processor /proc/cpuinfo)" && \
-    mkdir -p "/staging/usr/lib/" && \
-    cp lib/libGL.a "$SYSROOT/" && \
-    cp lib/libGL.a "/staging/usr/lib/" && \
-    cd /tmp && \
-    rm -rf "/tmp/gl4es-1.1.2/"
-    
 # Install zstd
 RUN git clone "https://github.com/facebook/zstd.git" "/tmp/zstd" && \
     cd "/tmp/zstd/lib" && \
     make install CC=arm-buildroot-linux-gnueabihf-gcc "DESTDIR=$SYSROOT" PREFIX=/usr "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    make install CC=arm-buildroot-linux-gnueabihf-gcc "DESTDIR=/staging" PREFIX=/usr "-j$(grep -c ^processor /proc/cpuinfo)" && \
     cd "/tmp" && rm -rf "/tmp/zstd"
 
+# Install gulrak/filesystem
+RUN cd /tmp && \
+    git clone https://github.com/gulrak/filesystem.git filesystem && \
+    cp -r filesystem/include/ghc "$SYSROOT/usr/include" && \
+    cp -r filesystem/include/ghc "/staging/usr/include" && \
+    rm -rf /tmp/filesystem
+
+# chmod /staging
 RUN chmod -R a=u "/staging/" && find /staging/
 
 FROM builder2

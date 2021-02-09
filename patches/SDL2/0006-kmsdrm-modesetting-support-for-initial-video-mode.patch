@@ -1,0 +1,175 @@
+From 3c240579fb4106a5d2541daa091317f067a137f0 Mon Sep 17 00:00:00 2001
+From: cmitu <31816814+cmitu@users.noreply.github.com>
+Date: Mon, 28 Dec 2020 10:16:45 +0000
+Subject: [PATCH 6/8] kmsdrm: modesetting support for initial video mode
+
+Allow modesetting for the video KMSDRM driver via environment variables (SDL_VIDEO_KMSDRM_CRTCID, SDL_VIDEO_KMSDRM_MODEID, SDL_VIDEO_KMSDRM_MODELINE) and unlock aspect ratio flag decoding via DRM, so that all possible modes are exposed to the KMSDRM driver.
+---
+ src/video/kmsdrm/SDL_kmsdrmvideo.c | 103 ++++++++++++++++++++++++++++-
+ 1 file changed, 100 insertions(+), 3 deletions(-)
+
+diff --git a/src/video/kmsdrm/SDL_kmsdrmvideo.c b/src/video/kmsdrm/SDL_kmsdrmvideo.c
+index f3b8e5569..6fcd58c23 100644
+--- a/src/video/kmsdrm/SDL_kmsdrmvideo.c
++++ b/src/video/kmsdrm/SDL_kmsdrmvideo.c
+@@ -65,6 +65,12 @@ static int set_client_caps (int fd)
+     if (KMSDRM_drmSetClientCap(fd, DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1)) {
+          return SDL_SetError("no universal planes support.");
+     }
++#ifdef DRM_CLIENT_CAP_ASPECT_RATIO
++    /* Expose aspect ratio flags to userspace if available */
++    if (KMSDRM_drmSetClientCap(fd, DRM_CLIENT_CAP_ASPECT_RATIO, 1)) {
++        return SDL_SetError("no aspect ratio reporting information support.");
++    }
++#endif
+     return 0;
+ }
+ 
+@@ -170,6 +176,35 @@ get_driindex(void)
+     return -ENOENT;
+ }
+ 
++static drmModeModeInfo *
++connector_find_mode(drmModeConnector *connector, const char *mode_str, const unsigned int vrefresh)
++{
++    short i;
++    drmModeModeInfo *mode;
++    for (i = 0; i < connector->count_modes; i++) {
++        mode = &connector->modes[i];
++        if (!strcmp(mode->name, mode_str)) {
++            /* If the vertical refresh frequency is not specified, then return the first mode that matches by name.
++             * Otherwise, return the mode that matches the name and the specified vertical refresh frequency.
++             */
++            if (vrefresh == 0)
++                return mode;
++            else if (mode->vrefresh == vrefresh)
++                return mode;
++        }
++    }
++
++    return NULL;
++}
++
++static SDL_bool
++compare_drm_mode_info(const drmModeModeInfo mode1, const drmModeModeInfo mode2) {
++    if ( mode1.hdisplay == mode2.hdisplay && mode1.vdisplay==mode2.vdisplay && mode1.vrefresh==mode2.vrefresh) {
++        return SDL_TRUE;
++    } else {
++        return SDL_FALSE;
++    }
++}
+ #if 0
+ 
+ /**********************/
+@@ -1009,10 +1044,14 @@ int KMSDRM_DisplayDataInit (_THIS, SDL_DisplayData *dispdata) {
+     drmModeConnector *connector = NULL;
+     drmModeCrtc *crtc = NULL;
+ 
+-    char devname[32];
+     int ret = 0;
+     unsigned i,j;
+ 
++    const char *mode_line_override, *crtc_override, *mode_override, *p;
++    char *hint_video_mode = NULL;
++    unsigned short hint_vrefresh = 0;
++    drmModeModeInfo *override_mode = NULL;
++
+     dispdata->atomic_flags = 0;
+     dispdata->atomic_req = NULL;
+     dispdata->kms_fence = NULL;
+@@ -1029,11 +1068,11 @@ int KMSDRM_DisplayDataInit (_THIS, SDL_DisplayData *dispdata) {
+     /* Open /dev/dri/cardNN */
+     SDL_snprintf(viddata->devpath, sizeof(viddata->devpath), "/dev/dri/card%d", viddata->devindex);
+ 
+-    SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "Opening device %s", devname);
++    SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "Opening device %s", viddata->devpath);
+     viddata->drm_fd = open(viddata->devpath, O_RDWR | O_CLOEXEC);
+ 
+     if (viddata->drm_fd < 0) {
+-        ret = SDL_SetError("Could not open %s", devname);
++        ret = SDL_SetError("Could not open %s", viddata->devpath);
+         goto cleanup;
+     }
+ 
+@@ -1148,6 +1187,14 @@ int KMSDRM_DisplayDataInit (_THIS, SDL_DisplayData *dispdata) {
+         }
+     }
+ 
++    /* See if there is any CRTC ID override passed in the environment */
++    crtc_override = SDL_getenv("SDL_VIDEO_KMSDRM_CRTCID");
++    if (crtc_override) {
++        SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO,"Override KMS CRTCID hint received (SDL_VIDEO_KMSDRM_CRTCID) - %s", crtc_override);
++        encoder->crtc_id=SDL_atoi(crtc_override);
++        crtc = KMSDRM_drmModeGetCrtc(viddata->drm_fd, encoder->crtc_id);
++    }
++
+     if (!crtc) {
+         ret = SDL_SetError("No CRTC found.");
+         goto cleanup;
+@@ -1171,6 +1218,51 @@ int KMSDRM_DisplayDataInit (_THIS, SDL_DisplayData *dispdata) {
+         dispdata->mode = dispdata->preferred_mode;
+     }
+ 
++    /* See if any hints about the CRTCID/MODEID/MODELINE are set by the calling environment
++       - SDL_VIDEO_KMSDRM_MODEID: the Mode ID
++       - SDL_VIDEO_KMSDRM_MODELINE: a video mode specificatied as WxH[@VertRefresh]
++    */
++    mode_override = SDL_getenv("SDL_VIDEO_KMSDRM_MODEID");
++    if (mode_override) {
++        if ( SDL_atoi(mode_override) > connector->count_modes ) {
++            SDL_LogWarn(SDL_LOG_CATEGORY_VIDEO, "Invalid override KMS ModeID received (SDL_VIDEO_KMSDRM_MODEID: %s)", mode_override);
++        } else {
++            SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "Override KMS ModeID received (SDL_VIDEO_KMSDRM_MODEID: %s)", mode_override);
++            if ( !compare_drm_mode_info(dispdata->mode, connector->modes[SDL_atoi(mode_override)]) ) {
++                dispdata->modeset_pending = SDL_TRUE;
++                dispdata->mode = connector->modes[SDL_atoi(mode_override)];
++            }
++        }
++    }
++
++    mode_line_override = SDL_getenv("SDL_VIDEO_KMSDRM_MODELINE");
++    if (mode_line_override && !mode_override) {
++        /* Video mode override, formatted as WxH[@VertRefresh] */
++        SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "Override KMS video mode received (SDL_VIDEO_KMSDRM_MODELINE: %s)", mode_line_override);
++
++       p = strchr(mode_line_override, '@');
++       if (p == NULL) {
++           hint_video_mode = strdup(mode_line_override);
++       } else {
++           hint_video_mode = strndup(mode_line_override, (unsigned int)(p - mode_line_override));
++           hint_vrefresh = strtoul(p + 1, NULL, 10);
++       }
++
++       override_mode = connector_find_mode(connector, hint_video_mode, hint_vrefresh);
++       if (override_mode) {
++            if ((*override_mode).hdisplay != dispdata->mode.hdisplay ||
++                (*override_mode).vdisplay != dispdata->mode.vdisplay ||
++                (*override_mode).vrefresh != dispdata->mode.vrefresh) {
++                    SDL_LogDebug(SDL_LOG_CATEGORY_VIDEO, "Setting video mode to %dx%d @ %d",(*override_mode).hdisplay, (*override_mode).vdisplay, (*override_mode).vrefresh);
++                    dispdata->mode = (*override_mode);
++                    dispdata->modeset_pending = SDL_TRUE;
++            }
++        } else {
++            SDL_LogWarn(SDL_LOG_CATEGORY_VIDEO, "Cannot find a suitable video mode on connector %d for mode %s, using defaults",
++                connector->connector_id, mode_line_override);
++        }
++    }
++
+     if (dispdata->mode.hdisplay == 0 || dispdata->mode.vdisplay == 0 ) {
+         ret = SDL_SetError("Couldn't get a valid connector videomode.");
+         goto cleanup;
+@@ -1608,6 +1700,11 @@ KMSDRM_VideoInit(_THIS)
+     /* Add the display only when it's ready, */
+     SDL_AddVideoDisplay(&display, SDL_FALSE);
+ 
++    /* Check if there is any pending modeset operation triggered by overrides */
++    if ( dispdata->modeset_pending ) {
++        KMSDRM_SetDisplayMode(_this, &display, &display.current_mode);
++    }
++
+     /* Use this if you ever need to see info on all available planes. */
+ #if 0
+     get_planes_info(_this);
+-- 
+2.20.1
+

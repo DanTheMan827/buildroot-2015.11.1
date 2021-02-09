@@ -1,0 +1,75 @@
+From 204b25b0ffb6fd3d255b7784f96b4c44b31943de Mon Sep 17 00:00:00 2001
+From: Conn O'Griofa <connogriofa@gmail.com>
+Date: Wed, 7 Aug 2019 03:11:08 +0100
+Subject: [PATCH 5/8] Improve kmsdrm + rpi driver coexistence
+
+* Ensure that DEFAULT_OGL is set correctly (fixes OpenGL)
+* Silence kmsdrm driver init error when using VideoCore.
+* Remove VideoCore cflags from SDL_CFLAGS; these flags are unnecessary
+  and will cause conflicts when building SDL2 applications for VC4.
+---
+ configure                          | 2 +-
+ configure.ac                       | 2 +-
+ src/video/SDL_egl.c                | 2 ++
+ src/video/kmsdrm/SDL_kmsdrmvideo.c | 6 ++++++
+ 4 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/configure b/configure
+index d4128d097..3ab3576c5 100755
+--- a/configure
++++ b/configure
+@@ -20059,7 +20059,7 @@ $as_echo "$have_video_rpi" >&6; }
+ 
+         if test x$have_video_rpi = xyes; then
+             CFLAGS="$CFLAGS $RPI_CFLAGS"
+-            SDL_CFLAGS="$SDL_CFLAGS $RPI_CFLAGS"
++            #SDL_CFLAGS="$SDL_CFLAGS $RPI_CFLAGS"
+             EXTRA_CFLAGS="$EXTRA_CFLAGS $RPI_CFLAGS"
+             EXTRA_LDFLAGS="$EXTRA_LDFLAGS $RPI_LIBS"
+             SOURCES="$SOURCES $srcdir/src/video/raspberry/*.c"
+diff --git a/configure.ac b/configure.ac
+index a7926d3b2..3b643c478 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1671,7 +1671,7 @@ AS_HELP_STRING([--enable-video-rpi], [use Raspberry Pi video driver [[default=ye
+ 
+         if test x$have_video_rpi = xyes; then
+             CFLAGS="$CFLAGS $RPI_CFLAGS"
+-            SDL_CFLAGS="$SDL_CFLAGS $RPI_CFLAGS"
++            #SDL_CFLAGS="$SDL_CFLAGS $RPI_CFLAGS"
+             EXTRA_CFLAGS="$EXTRA_CFLAGS $RPI_CFLAGS"
+             EXTRA_LDFLAGS="$EXTRA_LDFLAGS $RPI_LIBS"
+             SOURCES="$SOURCES $srcdir/src/video/raspberry/*.c"
+diff --git a/src/video/SDL_egl.c b/src/video/SDL_egl.c
+index a50aa738c..62138b07e 100644
+--- a/src/video/SDL_egl.c
++++ b/src/video/SDL_egl.c
+@@ -44,6 +44,8 @@
+ 
+ #if SDL_VIDEO_DRIVER_RPI
+ /* Raspbian places the OpenGL ES/EGL binaries in a non standard path */
++#include <unistd.h>
++#define DEFAULT_OGL ( vc4 ? "libGL.so.1" : "" )
+ #define DEFAULT_EGL ( vc4 ? "libEGL.so.1" : "libbrcmEGL.so" )
+ #define DEFAULT_OGL_ES2 ( vc4 ? "libGLESv2.so.2" : "libbrcmGLESv2.so" )
+ #define ALT_EGL "libEGL.so"
+diff --git a/src/video/kmsdrm/SDL_kmsdrmvideo.c b/src/video/kmsdrm/SDL_kmsdrmvideo.c
+index e84bd5ebc..f3b8e5569 100644
+--- a/src/video/kmsdrm/SDL_kmsdrmvideo.c
++++ b/src/video/kmsdrm/SDL_kmsdrmvideo.c
+@@ -124,6 +124,12 @@ static unsigned int get_dricount(void)
+     DIR *folder;
+ 
+     if (!(stat(KMSDRM_DRI_PATH, &sb) == 0 && S_ISDIR(sb.st_mode))) {
++#if SDL_VIDEO_DRIVER_RPI
++        // exit silently if VC4 driver is not active
++        SDL_bool vc4 = (0 == access("/sys/module/vc4/", F_OK));
++        if (!vc4)
++            return 0;
++#endif
+         SDL_SetError("The path %s cannot be opened or is not available",
+         KMSDRM_DRI_PATH);
+         return 0;
+-- 
+2.20.1
+
