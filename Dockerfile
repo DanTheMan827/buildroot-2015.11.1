@@ -1,4 +1,4 @@
-FROM dantheman827/buildroot-2015.11.1:brbase as builder1
+FROM dantheman827/buildroot-2015.11.1:latest-base as builder1
 FROM debian:latest as builder2
 COPY --from=0 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
 
