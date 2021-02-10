@@ -68,16 +68,16 @@ RUN mkdir -p /staging/usr/include/
 COPY "patches/" "/patches"
 
 # Install gl4es
-RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.2.tar.gz" -O - | tar -xzvf - -C /tmp && \
-    mkdir -p /tmp/gl4es-1.1.2/build/ && \
-    cd /tmp/gl4es-1.1.2/build/ && \
+RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -O - | tar -xzvf - -C /tmp && \
+    mkdir -p /tmp/gl4es-1.1.4/build/ && \
+    cd /tmp/gl4es-1.1.4/build/ && \
     cmake .. -DCMAKE_TOOLCHAIN_FILE=/buildroot-2015.11.1/toolchain.cmake -DNOX11=ON -DNOEGL=ON -DSTATICLIB=ON && \
     make "-j$(grep -c ^processor /proc/cpuinfo)" && \
     mkdir -p "/staging/usr/lib/" && \
-    cp lib/libGL.a "$SYSROOT/" && \
-    cp lib/libGL.a "/staging/usr/lib/" && \
+    cp ../lib/libGL.a "$SYSROOT/" && \
+    cp ../lib/libGL.a "/staging/usr/lib/" && \
     cd /tmp && \
-    rm -rf "/tmp/gl4es-1.1.2/"
+    rm -rf "/tmp/gl4es-1.1.4/"
 
 # Install SDL2
 RUN cd /tmp && \
