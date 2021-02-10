@@ -140,14 +140,16 @@ RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O 
     rm -rf "/tmp/attr-2.4.48/"
 
 # Install bluez
-ADD bluez-5.54-sixaxis-auto.tar.gz /tmp
-RUN cd "/tmp/bluez-5.54-sixaxis-auto" && \
+RUN git clone "https://github.com/bluez/bluez.git" "/tmp/bluez" && \
+    cd "/tmp/bluez" && \
+    git checkout 5.54 && \
+    git am /patches/bluez/* && \
     ./bootstrap && \
     ./configure "--host=arm-buildroot-linux-gnueabihf" "--prefix=/usr" "--disable-systemd" "--disable-cups" "--disable-obex" "--enable-library" "--enable-static" "--enable-sixaxis" "--exec-prefix=/usr" "--enable-deprecated" &&  \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
-    rm -rf "/tmp/bluez-5.54-sixaxis-auto/"
+    rm -rf "/tmp/bluez/"
 
 # Install SDL2 Mixer
 RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
