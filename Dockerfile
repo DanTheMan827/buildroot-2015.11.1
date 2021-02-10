@@ -178,14 +178,13 @@ RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.ta
     rm -rf "/tmp/freetype-2.10.2/"
 
 # Install SDL2_ttf
-RUN wget "https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
-    cd "/tmp/SDL2_ttf-2.0.14/" && \
-    sed -i "s#SDL_opengl.h#GL/GL.h#g" configure && \
-    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" --without-gl && \
+RUN wget "https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_ttf-2.0.15/" && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging" && \
     cd "/tmp" && \
-    rm -rf "/tmp/SDL2_ttf-2.0.14/"
+    rm -rf "/tmp/SDL2_ttf-2.0.15/"
 
 # Install zstd
 RUN git clone "https://github.com/facebook/zstd.git" "/tmp/zstd" && \
