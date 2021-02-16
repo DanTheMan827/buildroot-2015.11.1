@@ -84,7 +84,7 @@ RUN cd /tmp && \
     git clone "https://github.com/sdl-mirror/SDL.git" SDL && \
     cd SDL && \
     git checkout 5c829aac66a491b9d23b12f4c37bf896dc11f3a8 && \
-    git am /patches/SDL2/* && \
+    git am /patches/SDL2/*.patch && \
     ./configure \
       --disable-video-rpi \
       --disable-video-x11-xcursor \
@@ -143,7 +143,7 @@ RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -O 
 RUN git clone "https://github.com/bluez/bluez.git" "/tmp/bluez" && \
     cd "/tmp/bluez" && \
     git checkout 5.54 && \
-    git am /patches/bluez/* && \
+    git am /patches/bluez/*.patch && \
     ./bootstrap && \
     ./configure "--host=arm-buildroot-linux-gnueabihf" "--prefix=/usr" "--disable-systemd" "--disable-cups" "--disable-obex" "--enable-library" "--enable-static" "--enable-sixaxis" "--exec-prefix=/usr" "--enable-deprecated" &&  \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
