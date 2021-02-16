@@ -58,7 +58,7 @@ RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
 
 # Copy new GL headers
 RUN rm -rf "$SYSROOT/usr/include/EGL" "$SYSROOT/usr/include/GLES" "$SYSROOT/usr/include/GLES2" "$SYSROOT/usr/include/KHR"
-COPY "gl_headers" "$SYSROOT/usr/include/"
+COPY "gl_headers" "/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/"
 
 # Set up builder3
 FROM builder2 as builder3
@@ -81,7 +81,7 @@ RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -O - | tar -xz
 
 # Install SDL2
 RUN cd /tmp && \
-    git clone "https://github.com/sdl-mirror/SDL.git" && \
+    git clone "https://github.com/sdl-mirror/SDL.git" SDL && \
     cd SDL && \
     git checkout 5c829aac66a491b9d23b12f4c37bf896dc11f3a8 && \
     git am /patches/SDL2/* && \
@@ -110,7 +110,7 @@ RUN cd /tmp && \
       --prefix=/usr && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
-    cd "/tmp" && rm -rf "/tmp/SDL-mirror"
+    cd "/tmp" && rm -rf "/tmp/SDL"
 
 # Install hidapi
 RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
