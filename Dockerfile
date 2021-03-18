@@ -110,6 +110,7 @@ RUN cd /tmp && \
       --prefix=/usr && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
+    sed -e "s#\"/usr\"#\"$SYSROOT/usr\"#" -i "$SYSROOT/usr/lib/cmake/SDL2/sdl2-config.cmake" "/staging/usr/lib/cmake/SDL2/sdl2-config.cmake" && \
     cd "/tmp" && rm -rf "/tmp/SDL"
 
 # Install hidapi
