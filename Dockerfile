@@ -9,7 +9,7 @@ COPY --from=1 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
 RUN sed \
         -Ee 's#^prefix=/usr$#prefix="/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/usr"#' \
         -e 's#^exec_prefix=/usr$#exec_prefix=${prefix}#' \
-        "/buildroot-2015.11.1/output/build/sdl2-2.0.3/sdl2-config" > "/buildroot-2015.11.1/output/host/usr/bin/sdl2-config" && \
+        -i "/buildroot-2015.11.1/output/host/usr/bin/sdl2-config" && \
     chmod +x "/buildroot-2015.11.1/output/host/usr/bin/sdl2-config" && \
     ln -s "sdl2-config" "/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-sdl2-config"
 
