@@ -62,10 +62,20 @@ COPY "gl_headers" "/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnue
 
 # Set up builder3
 FROM builder2 as builder3
-RUN mkdir -p /staging/usr/include/
+RUN mkdir -p /staging/usr/include/ /staging/usr/lib/
 
 # Copy patches
 COPY "patches/" "/patches"
+
+# Install boost
+RUN wget "https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.gz" -O - | tar -xzvf - -C "/tmp/" && \
+    cd "/tmp/boost_1_75_0" && \
+    ./boostrap.sh && \
+    sed -e 's/    using gcc ;/    using gcc : arm : arm-buildroot-linux-gnueabihf-g++ ;/' -i project-config.jam && \
+    ./b2 install toolset=gcc-arm --prefix="$SYSROOT/usr/" && \
+    ./b2 install toolset=gcc-arm --prefix="/staging/usr/" && \
+    cd /tmp && \
+    rm -rf "/tmp/boost_1_75_0"
 
 # Install gl4es
 RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -O - | tar -xzvf - -C /tmp && \
@@ -153,22 +163,31 @@ RUN git clone "https://github.com/bluez/bluez.git" "/tmp/bluez" && \
     rm -rf "/tmp/bluez/"
 
 # Install SDL2 Mixer
-RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
-    cd "/tmp/SDL2_mixer-2.0.1/" && \
+RUN wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.4.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_mixer-2.0.4/" && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
-    rm -rf "/tmp/SDL2_mixer-2.0.1/"
+    rm -rf "/tmp/SDL2_mixer-2.0.4/"
 
 # Install SDL2 Image
-RUN wget "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
-    cd "/tmp/SDL2_image-2.0.1/" && \
+RUN wget "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_image-2.0.5/" && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
     cd "/tmp" && \
-    rm -rf "/tmp/SDL2_image-2.0.1/"
+    rm -rf "/tmp/SDL2_image-2.0.5/"
+
+# Install SDL2 Net
+RUN wget "https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
+    cd "/tmp/SDL2_net-2.0.1/" && \
+    ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
+    make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=/staging/" && \
+    cd "/tmp" && \
+    rm -rf "/tmp/SDL2_net-2.0.1/"
 
 # Install Freetype
 RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz" -O - | tar -xzvf - -C "/tmp" && \
