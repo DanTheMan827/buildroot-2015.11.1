@@ -73,7 +73,7 @@ COPY "patches/" "/patches"
 # Install boost
 RUN wget "https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.gz" -O - | tar -xzvf - -C "/tmp/" && \
     cd "/tmp/boost_1_75_0" && \
-    ./boostrap.sh && \
+    ./bootstrap.sh && \
     sed -e 's/    using gcc ;/    using gcc : arm : arm-buildroot-linux-gnueabihf-g++ ;/' -i project-config.jam && \
     ./b2 install toolset=gcc-arm --prefix="$SYSROOT/usr/" && \
     ./b2 install toolset=gcc-arm --prefix="/staging/usr/" && \
