@@ -1,6 +1,9 @@
 FROM dantheman827/buildroot-2015.11.1:latest-base as builder1
-FROM debian:latest as builder2
-COPY --from=0 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
+FROM builder1 as builder2
+RUN cd "/buildroot-2015.11.1" && rm -rf "output/build" "output/images" "dl"
+FROM debian:latest as builder3
+COPY --from=0 "/buildroot-2015.11.1/output/build/sdl2-2.0.3/sdl2-config" "/buildroot-2015.11.1/output/host/usr/bin/sdl2-config"
+COPY --from=1 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
 
 # Create a sdl2-config patched to the sysroot that buildroot built
 RUN sed \
@@ -60,8 +63,8 @@ RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
 RUN rm -rf "$SYSROOT/usr/include/EGL" "$SYSROOT/usr/include/GLES" "$SYSROOT/usr/include/GLES2" "$SYSROOT/usr/include/KHR"
 COPY "gl_headers" "/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/"
 
-# Set up builder3
-FROM builder2 as builder3
+# Set up builder4
+FROM builder3 as builder4
 RUN mkdir -p /staging/usr/include/ /staging/usr/lib/
 
 # Copy patches
@@ -225,8 +228,8 @@ RUN cd /tmp && \
 # chmod /staging
 RUN chmod -R a=u "/staging/" && find /staging/
 
-FROM builder2
-COPY --from=builder3 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
+FROM builder3
+COPY --from=builder4 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 RUN sed -e "s#libdir='/usr/lib'#libdir='$SYSROOT/usr/lib'#" -i $SYSROOT/usr/lib/*.la
 RUN mv "$SYSROOT/usr/bin/freetype-config" /buildroot-2015.11.1/output/host/usr/bin/freetype-config
 
