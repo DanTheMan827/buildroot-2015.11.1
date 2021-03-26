@@ -1,6 +1,25 @@
 FROM dantheman827/buildroot-2015.11.1:latest-base as builder1
 FROM builder1 as builder2
 RUN cd "/buildroot-2015.11.1" && rm -rf "output/build" "output/images" "dl"
+
+# Set path
+ENV BUILDROOT /buildroot-2015.11.1
+ENV SYSROOT $BUILDROOT/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot
+ENV PATH $BUILDROOT/output/host/usr/bin:$PATH
+
+# Install boost
+RUN wget "https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.gz" -O - | tar -xzvf - -C "/tmp/" && \
+    cd "/tmp/boost_1_75_0" && \
+    ./bootstrap.sh && \
+    sed -e 's/    using gcc ;/    using gcc : arm : arm-buildroot-linux-gnueabihf-g++ ;/' -i project-config.jam && \
+    ./b2 install toolset=gcc-arm --prefix="$SYSROOT/usr/" && \
+    cd /tmp && \
+    rm -rf "/tmp/boost_1_75_0"
+
+# Set git identity
+RUN git config --global user.email "dockerfile@example.com" && \
+    git config --global user.name "Dockerfile"
+
 FROM debian:latest as builder3
 COPY --from=0 "/buildroot-2015.11.1/output/build/sdl2-2.0.3/sdl2-config" "/buildroot-2015.11.1/output/host/usr/bin/sdl2-config"
 COPY --from=1 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
@@ -46,15 +65,6 @@ RUN apt-get update && \
 RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
     locale-gen
 
-# Set path
-ENV BUILDROOT /buildroot-2015.11.1
-ENV SYSROOT $BUILDROOT/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot
-ENV PATH $BUILDROOT/output/host/usr/bin:$PATH
-
-# Set git identity
-RUN git config --global user.email "dockerfile@example.com" && \
-    git config --global user.name "Dockerfile"
-
 # Copy toolchain.cmake
 COPY "toolchain.cmake" "/buildroot-2015.11.1"
 RUN chmod a=u "/buildroot-2015.11.1/toolchain.cmake"
@@ -69,16 +79,6 @@ RUN mkdir -p /staging/usr/include/ /staging/usr/lib/
 
 # Copy patches
 COPY "patches/" "/patches"
-
-# Install boost
-RUN wget "https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.gz" -O - | tar -xzvf - -C "/tmp/" && \
-    cd "/tmp/boost_1_75_0" && \
-    ./bootstrap.sh && \
-    sed -e 's/    using gcc ;/    using gcc : arm : arm-buildroot-linux-gnueabihf-g++ ;/' -i project-config.jam && \
-    ./b2 install toolset=gcc-arm --prefix="$SYSROOT/usr/" && \
-    ./b2 install toolset=gcc-arm --prefix="/staging/usr/" && \
-    cd /tmp && \
-    rm -rf "/tmp/boost_1_75_0"
 
 # Install gl4es
 RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -O - | tar -xzvf - -C /tmp && \
