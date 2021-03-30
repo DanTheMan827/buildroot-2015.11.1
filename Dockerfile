@@ -108,6 +108,7 @@ RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -q -O - | tar 
     rm -r * && \
     cmake .. -DCMAKE_TOOLCHAIN_FILE=/buildroot-2015.11.1/toolchain.cmake -DNOX11=ON -DNOEGL=ON && \
     make "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    mv ../lib/libGL.so.1 ../lib/libGL.so && \
     mkdir -p "/staging/usr/lib/" && \
     cp ../lib/* "$SYSROOT/usr/lib/" && \
     cp ../lib/* "/staging/usr/lib/" && \
