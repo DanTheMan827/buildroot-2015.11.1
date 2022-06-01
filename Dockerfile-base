@@ -26,10 +26,8 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
     locale-gen
 
-ADD buildroot-2015.11.1.tar.gz /
-
-COPY [".config", "/buildroot-2015.11.1/"]
 RUN 
+  wget https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz -O - | tar -czf - -C / && \
   mkdir -p /buildroot-2015.11.1/dl/ && \
   cd /buildroot-2015.11.1/dl/ && \
   wget \
@@ -49,7 +47,6 @@ RUN
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/binutils-2.24.tar.bz2 \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bison-3.0.4.tar.xz \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/boost_1_58_0.tar.bz2 \
-    https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/busybox-1.24.1.tar.bz2 \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bzip2-1.0.6.tar.gz \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cloog-0.18.4.tar.gz \
@@ -200,5 +197,7 @@ RUN
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/xz-5.2.2.tar.bz2 \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zip30.tgz \
     https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zlib-1.2.8.tar.xz
+
+COPY [".config", "/buildroot-2015.11.1/"]
 
 RUN make -C "/buildroot-2015.11.1/" && chmod -R a=u "/buildroot-2015.11.1"
