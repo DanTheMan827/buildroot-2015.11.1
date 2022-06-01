@@ -88,7 +88,7 @@ RUN cd /tmp && \
 # Install boost
 FROM basebuilder as boost
 COPY --from=zstd /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
-RUN wget "https://netactuate.dl.sourceforge.net/project/boost/boost/1.75.0/boost_1_75_0.tar.gz" -q -O - | tar -xzvf - -C "/tmp/" && \
+RUN wget "https://boostorg.jfrog.io/artifactory/main/release/1.75.0/source/boost_1_75_0.tar.gz" -q -O - | tar -xzvf - -C "/tmp/" && \
     cd "/tmp/boost_1_75_0" && \
     ./bootstrap.sh && \
     sed -e 's/    using gcc ;/    using gcc : arm : arm-buildroot-linux-gnueabihf-g++ ;/' -i project-config.jam && \
