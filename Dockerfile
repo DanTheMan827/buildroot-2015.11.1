@@ -15,7 +15,6 @@ RUN sed \
     ln -s "sdl2-config" "/buildroot-2015.11.1/output/host/usr/bin/arm-buildroot-linux-gnueabihf-sdl2-config"
 
 # Update apt, install packages, and update command-not-found data
-RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
