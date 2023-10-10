@@ -28,7 +28,7 @@ RUN apt-get update && \
         make \
         git \
         cpio \
-        python \
+        python3 \
         unzip \
         rsync \
         bc \
@@ -36,11 +36,13 @@ RUN apt-get update && \
         locales \
         build-essential \
         bsdmainutils \
-        libaudiofile-dev \
-        upx && \
+        libaudiofile-dev && \
     apt-get clean && \
     apt update && \
     update-command-not-found
+
+# Grab UPX from github because it doesn't appear to be in apt.
+RUN wget https://github.com/upx/upx/releases/download/v4.1.0/upx-4.1.0-amd64_linux.tar.xz -O - | tar -xJvf - --strip-components=1 -C . upx-4.1.0-amd64_linux/upx
 
 # Generate locale
 RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
