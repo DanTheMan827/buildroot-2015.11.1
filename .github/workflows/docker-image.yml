@@ -5,9 +5,13 @@ on:
   push:
     branches: [ master ]
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   build: 
-    name: Build ${{ matrix.dockerfile }}
+    name: Build ${{ matrix.name }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,6 +21,7 @@ jobs:
           - name: base image
             dockerfile: Dockerfile-base
             tag: latest-base
+
           - name: final image
             dockerfile: Dockerfile
             tag: latest
