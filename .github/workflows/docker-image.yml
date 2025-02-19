@@ -6,56 +6,41 @@ on:
     branches: [ master ]
 
 jobs:
-
-  build-base:
-    name: "Build base image"
+  build: 
+    name: Build ${{ matrix.dockerfile }}
     runs-on: ubuntu-latest
 
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - name: base image
+            dockerfile: Dockerfile-base
+            tag: latest-base
+          - name: final image
+            dockerfile: Dockerfile
+            tag: latest
+
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+
     - name: Docker Setup Buildx
       # You may pin to the exact commit or the version.
       # uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6
-      uses: docker/setup-buildx-action@v2.0.0
+      uses: docker/setup-buildx-action@v3
+
     - name: Docker Login
-      uses: docker/login-action@v2.0.0
+      uses: docker/login-action@v3
       with:
         username: ${{secrets.DOCKER_USER}}
         password: ${{secrets.DOCKER_PASSWORD}}
 
-    - name: Build and push base image
-      uses: docker/build-push-action@v3
+    - name: Build and push ${{ matrix.name }}
+      uses: docker/build-push-action@v6
       with:
         context: .
-        file: Dockerfile-base
+        file: ${{ matrix.dockerfile }}
         push: true
-        tags: ${{secrets.DOCKER_USER}}/${{secrets.REPO_NAME}}:latest-base
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-        
-  build-final:
-    name: "Build final image"
-    needs: build-base
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Docker Setup Buildx
-      # You may pin to the exact commit or the version.
-      # uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6
-      uses: docker/setup-buildx-action@v2.0.0
-    - name: Docker Login
-      uses: docker/login-action@v2.0.0
-      with:
-        username: ${{secrets.DOCKER_USER}}
-        password: ${{secrets.DOCKER_PASSWORD}}
-
-    - name: Build and push image
-      uses: docker/build-push-action@v3
-      with:
-        context: .
-        file: Dockerfile
-        push: true
-        tags: ${{secrets.DOCKER_USER}}/${{secrets.REPO_NAME}}:latest
+        tags: ${{secrets.DOCKER_USER}}/${{secrets.REPO_NAME}}:${{ matrix.tag }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
