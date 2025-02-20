@@ -208,7 +208,7 @@ RUN apt-get update && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
     locale-gen
 
-COPY --from=downloader /buildroot-2015.11.1 /
+COPY --from=downloader /buildroot-2015.11.1 /buildroot-2015.11.1
 COPY [".config", "/buildroot-2015.11.1/"]
-
+RUN find /buildroot-2015.11.1 -type f
 RUN make -C "/buildroot-2015.11.1/" && chmod -R a=u "/buildroot-2015.11.1"
