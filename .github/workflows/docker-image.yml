@@ -72,7 +72,7 @@ jobs:
     - name: Get date
       id: date
       run: |
-        echo "current=$(date)" >> $GITHUB
+        echo "current=$(date)" >> $GITHUB_OUTPUT
 
     - name: Create archive
       run: |
