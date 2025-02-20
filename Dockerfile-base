@@ -11,7 +11,7 @@ RUN \
 FROM downloader AS buildroot
 RUN wget -q "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz" -O "/tmp/buildroot.tar.gz" && \
     tar -xzvf "/tmp/buildroot.tar.gz" -C / && \
-    mkdir -p "/buildroot-2015.11.1/dl/"
+    mkdir -p "/buildroot-2015.11.1/dl/" && \
     rm "/tmp/buildroot.tar.gz"
 
 FROM downloader AS downloader-0
