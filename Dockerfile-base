@@ -1,30 +1,9 @@
-# Build with old debian because buildroot won't on newer
-FROM debian:jessie as builder1
+FROM debian:latest as downloader
 
-ADD ./sources.list /etc/apt/sources.list
 RUN apt-get update && \
     apt-get upgrade -y --force-yes && \
     apt-get install -y --force-yes \
-        wget \
-        curl \
-        command-not-found \
-        nano \
-        vim \
-        gcc \
-        g++ \
-        make \
-        git \
-        cpio \
-        python \
-        unzip \
-        rsync \
-        bc \
-        subversion \
-        locales \
-        build-essential && \
-    apt-get clean && \
-    sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
-    locale-gen
+        wget
 
 RUN \
     wget -q "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz" -O "/tmp/buildroot.tar.gz" && \
@@ -201,6 +180,35 @@ RUN \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zip30.tgz" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zlib-1.2.8.tar.xz"
 
+# Build with old debian because buildroot won't on newer
+FROM debian:jessie as builder1
+
+ADD ./sources.list /etc/apt/sources.list
+RUN apt-get update && \
+    apt-get upgrade -y --force-yes && \
+    apt-get install -y --force-yes \
+        wget \
+        curl \
+        command-not-found \
+        nano \
+        vim \
+        gcc \
+        g++ \
+        make \
+        git \
+        cpio \
+        python \
+        unzip \
+        rsync \
+        bc \
+        subversion \
+        locales \
+        build-essential && \
+    apt-get clean && \
+    sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
+    locale-gen
+
+COPY --from=downloader /buildroot-2015.11.1/ /
 COPY [".config", "/buildroot-2015.11.1/"]
 
 RUN make -C "/buildroot-2015.11.1/" && chmod -R a=u "/buildroot-2015.11.1"
