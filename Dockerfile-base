@@ -706,8 +706,8 @@ RUN apt-get update && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
     locale-gen
 
+FROM builder1 as builder2
 COPY --from=buildroot /buildroot-2015.11.1 /buildroot-2015.11.1
-
 COPY --from=downloader-0 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
 COPY --from=downloader-1 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
 COPY --from=downloader-2 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
