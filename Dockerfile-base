@@ -27,7 +27,9 @@ RUN apt-get update && \
     locale-gen
 
 RUN \
-    curl -s "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz" | tar -xzvf - -C /
+    curl -s -o "/tmp/buildroot.tar.gz" "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz" && \
+    tar -xzvf "/tmp/buildroot.tar.gz" -C / && \
+    rm "/tmp/buildroot.tar.gz"
 
 RUN \
     mkdir -p "/buildroot-2015.11.1/dl/" && \
