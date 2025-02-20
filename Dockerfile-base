@@ -335,7 +335,7 @@ RUN cd "/buildroot-2015.11.1/dl/" && \
 
 FROM downloader AS downloader-80
 RUN cd "/buildroot-2015.11.1/dl/" && \
-    wget "https://github.com/DanTheMan827/buildroot-dl/libmad-0.15.1b.tar.gz"
+    wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmad-0.15.1b.tar.gz"
 
 FROM downloader AS downloader-81
 RUN cd "/buildroot-2015.11.1/dl/" && \
