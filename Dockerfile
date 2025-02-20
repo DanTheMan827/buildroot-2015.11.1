@@ -89,7 +89,7 @@ RUN cd /tmp && \
 # Install boost
 FROM basebuilder as boost
 COPY --from=zstd /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
-RUN wget "https://boostorg.jfrog.io/artifactory/main/release/1.75.0/source/boost_1_75_0.tar.gz" -q -O - | tar -xzvf - -C "/tmp/" && \
+RUN wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/boost_1_75_0.tar.gz" -q -O - | tar -xzvf - -C "/tmp/" && \
     cd "/tmp/boost_1_75_0" && \
     ./bootstrap.sh && \
     sed -e 's/    using gcc ;/    using gcc : arm : arm-buildroot-linux-gnueabihf-g++ ;/' -i project-config.jam && \
@@ -173,7 +173,7 @@ RUN git clone "https://github.com/bluez/bluez.git" "/tmp/bluez" && \
 
 # Install attr
 FROM basebuilder as attr
-RUN wget "http://download.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
+RUN wget "https://download-mirror.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/attr-2.4.48/" && \
     ./configure "--prefix=/usr" "--disable-static" "--host=arm-buildroot-linux-gnueabihf" && \
     make install "-j$(grep -c ^processor /proc/cpuinfo)" "DESTDIR=$SYSROOT" && \
