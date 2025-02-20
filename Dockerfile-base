@@ -13,667 +13,667 @@ RUN wget -q "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/downlo
     tar -xzvf "/tmp/buildroot.tar.gz" -C / && \
     rm "/tmp/buildroot.tar.gz"
 
-FROM downloader AS D0
+FROM downloader AS downloader-0
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/aespipe-v2.4c.tar.bz2"
 
-FROM downloader AS D1
+FROM downloader AS downloader-1
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/alsa-lib-1.0.29.tar.bz2"
 
-FROM downloader AS D2
+FROM downloader AS downloader-2
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/alsa-utils-1.0.29.tar.bz2"
 
-FROM downloader AS D3
+FROM downloader AS downloader-3
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/audiofile-0.3.6.tar.gz"
 
-FROM downloader AS D4
+FROM downloader AS downloader-4
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/autoconf-2.69.tar.xz"
 
-FROM downloader AS D5
+FROM downloader AS downloader-5
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/automake-1.15.tar.xz"
 
-FROM downloader AS D6
+FROM downloader AS downloader-6
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bc-1.06.95.tar.bz2"
 
-FROM downloader AS D7
+FROM downloader AS downloader-7
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/binutils-2.24.tar.bz2"
 
-FROM downloader AS D8
+FROM downloader AS downloader-8
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bison-3.0.4.tar.xz"
 
-FROM downloader AS D9
+FROM downloader AS downloader-9
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/boost_1_58_0.tar.bz2"
 
-FROM downloader AS D10
+FROM downloader AS downloader-10
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/busybox-1.24.1.tar.bz2"
 
-FROM downloader AS D11
+FROM downloader AS downloader-11
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bzip2-1.0.6.tar.gz"
 
-FROM downloader AS D12
+FROM downloader AS downloader-12
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cloog-0.18.4.tar.gz"
 
-FROM downloader AS D13
+FROM downloader AS downloader-13
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cmake-3.3.2.tar.gz"
 
-FROM downloader AS D14
+FROM downloader AS downloader-14
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cpio-2.12.tar.gz"
 
-FROM downloader AS D15
+FROM downloader AS downloader-15
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cryptsetup-1.6.8.tar.xz"
 
-FROM downloader AS D16
+FROM downloader AS downloader-16
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/curl-7.45.0.tar.bz2"
 
-FROM downloader AS D17
+FROM downloader AS downloader-17
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dmalloc-5.5.2.tgz"
 
-FROM downloader AS D18
+FROM downloader AS downloader-18
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dosfstools-3.0.28.tar.xz"
 
-FROM downloader AS D19
+FROM downloader AS downloader-19
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dropbear-2015.71.tar.bz2"
 
-FROM downloader AS D20
+FROM downloader AS downloader-20
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/duma_2_5_15.tar.gz"
 
-FROM downloader AS D21
+FROM downloader AS downloader-21
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/e2fsprogs-1.42.13.tar.xz"
 
-FROM downloader AS D22
+FROM downloader AS downloader-22
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/e2tools-3158ef18a903ca4a98b8fa220c9fc5c133d8bdf6.tar.gz"
 
-FROM downloader AS D23
+FROM downloader AS downloader-23
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/elfutils-0.161.tar.bz2"
 
-FROM downloader AS D24
+FROM downloader AS downloader-24
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/elfutils-portability-0.161.patch"
 
-FROM downloader AS D25
+FROM downloader AS downloader-25
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ethtool-4.2.tar.xz"
 
-FROM downloader AS D26
+FROM downloader AS downloader-26
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/eudev-3.1.2.tar.gz"
 
-FROM downloader AS D27
+FROM downloader AS downloader-27
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/exfat-utils-1.2.1.tar.gz"
 
-FROM downloader AS D28
+FROM downloader AS downloader-28
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/expat-2.1.0.tar.gz"
 
-FROM downloader AS D29
+FROM downloader AS downloader-29
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fakeroot_1.18.4.orig.tar.bz2"
 
-FROM downloader AS D30
+FROM downloader AS downloader-30
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fb-test-app-rosetta-1.1.0.tar.gz"
 
-FROM downloader AS D31
+FROM downloader AS downloader-31
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbgrab-1.2.tar.gz"
 
-FROM downloader AS D32
+FROM downloader AS downloader-32
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbterm-1.7.0.tar.gz"
 
-FROM downloader AS D33
+FROM downloader AS downloader-33
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbv-1.0b.tar.gz"
 
-FROM downloader AS D34
+FROM downloader AS downloader-34
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fdk-aac-0.1.4.tar.gz"
 
-FROM downloader AS D35
+FROM downloader AS downloader-35
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ffmpeg-2.8.1.tar.xz"
 
-FROM downloader AS D36
+FROM downloader AS downloader-36
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/flac-1.3.1.tar.xz"
 
-FROM downloader AS D37
+FROM downloader AS downloader-37
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/flex-2.5.37.tar.gz"
 
-FROM downloader AS D38
+FROM downloader AS downloader-38
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fontconfig-2.11.1.tar.gz"
 
-FROM downloader AS D39
+FROM downloader AS downloader-39
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/FreeImage3170.zip"
 
-FROM downloader AS D40
+FROM downloader AS downloader-40
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/freetype-2.6.1.tar.bz2"
 
-FROM downloader AS D41
+FROM downloader AS downloader-41
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fribidi-0.19.6.tar.bz2"
 
-FROM downloader AS D42
+FROM downloader AS downloader-42
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fuse-2.9.4.tar.gz"
 
-FROM downloader AS D43
+FROM downloader AS downloader-43
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fuse-exfat-1.2.1.tar.gz"
 
-FROM downloader AS D44
+FROM downloader AS downloader-44
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gawk-4.1.3.tar.xz"
 
-FROM downloader AS D45
+FROM downloader AS downloader-45
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gcc-4.9.3.tar.bz2"
 
-FROM downloader AS D46
+FROM downloader AS downloader-46
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gdb-7.9.1.tar.xz"
 
-FROM downloader AS D47
+FROM downloader AS downloader-47
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gettext-0.19.6.tar.xz"
 
-FROM downloader AS D48
+FROM downloader AS downloader-48
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/giflib-5.1.1.tar.bz2"
 
-FROM downloader AS D49
+FROM downloader AS downloader-49
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/glib-2.46.1.tar.xz"
 
-FROM downloader AS D50
+FROM downloader AS downloader-50
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/glibc-2.22.tar.xz"
 
-FROM downloader AS D51
+FROM downloader AS downloader-51
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gmp-6.0.0a.tar.xz"
 
-FROM downloader AS D52
+FROM downloader AS downloader-52
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gnutls-3.3.18.tar.xz"
 
-FROM downloader AS D53
+FROM downloader AS downloader-53
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gperf-3.0.4.tar.gz"
 
-FROM downloader AS D54
+FROM downloader AS downloader-54
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/harfbuzz-1.0.6.tar.bz2"
 
-FROM downloader AS D55
+FROM downloader AS downloader-55
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/htop-1.0.3.tar.gz"
 
-FROM downloader AS D56
+FROM downloader AS downloader-56
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/icu4c-56_1-src.tgz"
 
-FROM downloader AS D57
+FROM downloader AS downloader-57
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/input-event-daemon-v0.1.3.tar.gz"
 
-FROM downloader AS D58
+FROM downloader AS downloader-58
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/iotop-0.6.tar.gz"
 
-FROM downloader AS D59
+FROM downloader AS downloader-59
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ipkg-0.99.163.tar.gz"
 
-FROM downloader AS D60
+FROM downloader AS downloader-60
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/isl-0.14.1.tar.xz"
 
-FROM downloader AS D61
+FROM downloader AS downloader-61
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/jpegsrc.v9a.tar.gz"
 
-FROM downloader AS D62
+FROM downloader AS downloader-62
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/kexec-tools-2.0.9.tar.xz"
 
-FROM downloader AS D63
+FROM downloader AS downloader-63
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/kmod-20.tar.xz"
 
-FROM downloader AS D64
+FROM downloader AS downloader-64
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lame-3.99.5.tar.gz"
 
-FROM downloader AS D65
+FROM downloader AS downloader-65
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libarchive-3.1.2.tar.gz"
 
-FROM downloader AS D66
+FROM downloader AS downloader-66
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libass-0.12.3.tar.xz"
 
-FROM downloader AS D67
+FROM downloader AS downloader-67
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libbluray-0.8.1.tar.bz2"
 
-FROM downloader AS D68
+FROM downloader AS downloader-68
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libdvdnav-4.2.1.tar.xz"
 
-FROM downloader AS D69
+FROM downloader AS downloader-69
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libdvdread-4.2.1.tar.xz"
 
-FROM downloader AS D70
+FROM downloader AS downloader-70
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libebml-1.3.1.tar.bz2"
 
-FROM downloader AS D71
+FROM downloader AS downloader-71
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/liberation-fonts-ttf-2.00.1.tar.gz"
 
-FROM downloader AS D72
+FROM downloader AS downloader-72
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libevdev-1.4.4.tar.xz"
 
-FROM downloader AS D73
+FROM downloader AS downloader-73
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libevent-2.0.22-stable.tar.gz"
 
-FROM downloader AS D74
+FROM downloader AS downloader-74
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libffi-3.2.1.tar.gz"
 
-FROM downloader AS D75
+FROM downloader AS downloader-75
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libgcrypt-1.6.4.tar.bz2"
 
-FROM downloader AS D76
+FROM downloader AS downloader-76
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libgpg-error-1.12.tar.gz"
 
-FROM downloader AS D77
+FROM downloader AS downloader-77
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libical-1.0.1.tar.gz"
 
-FROM downloader AS D78
+FROM downloader AS downloader-78
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libid3tag-0.15.1b.tar.gz"
 
-FROM downloader AS D79
+FROM downloader AS downloader-79
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libjpeg-turbo-1.4.1.tar.gz"
 
-FROM downloader AS D80
+FROM downloader AS downloader-80
 RUN cd "/buildroot-2015.11.1/dl/" && \
-    wget "https://github.comd/buildroot-dl/libmad-0.15.1b.tar.gz"
+    wget "https://github.com/DanTheMan827/buildroot-dl/libmad-0.15.1b.tar.gz"
 
-FROM downloader AS D81
+FROM downloader AS downloader-81
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmatroska-1.4.2.tar.bz2"
 
-FROM downloader AS D82
+FROM downloader AS downloader-82
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmodplug-0.8.8.5.tar.gz"
 
-FROM downloader AS D83
+FROM downloader AS downloader-83
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libnl-3.2.27.tar.gz"
 
-FROM downloader AS D84
+FROM downloader AS downloader-84
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libogg-1.3.2.tar.xz"
 
-FROM downloader AS D85
+FROM downloader AS downloader-85
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libpng-1.6.20.tar.xz"
 
-FROM downloader AS D86
+FROM downloader AS downloader-86
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsamplerate-0.1.8.tar.gz"
 
-FROM downloader AS D87
+FROM downloader AS downloader-87
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsilk-4268a02240c35c6055b0f237c46b09b2dcf79e45.tar.gz"
 
-FROM downloader AS D88
+FROM downloader AS downloader-88
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsndfile-1.0.25.tar.gz"
 
-FROM downloader AS D89
+FROM downloader AS downloader-89
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsoundtouch-010a91a59071c7fefd316fca62c0d980ec85b4b1.tar.gz"
 
-FROM downloader AS D90
+FROM downloader AS downloader-90
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsquish-1.13.tgz"
 
-FROM downloader AS D91
+FROM downloader AS downloader-91
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsvg-0.1.4.tar.gz"
 
-FROM downloader AS D92
+FROM downloader AS downloader-92
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libtheora-1.1.1.tar.xz"
 
-FROM downloader AS D93
+FROM downloader AS downloader-93
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libtool-2.4.6.tar.xz"
 
-FROM downloader AS D94
+FROM downloader AS downloader-94
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libump-ec0680628744f30b8fac35e41a7bd8e23e59c39f.tar.gz"
 
-FROM downloader AS D95
+FROM downloader AS downloader-95
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libusb-1.0.19.tar.bz2"
 
-FROM downloader AS D96
+FROM downloader AS downloader-96
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libvorbis-1.3.5.tar.xz"
 
-FROM downloader AS D97
+FROM downloader AS downloader-97
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libvpx-1.4.0.tar.bz2"
 
-FROM downloader AS D98
+FROM downloader AS downloader-98
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libwebp-0.4.3.tar.gz"
 
-FROM downloader AS D99
+FROM downloader AS downloader-99
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libxml2-2.9.3.tar.gz"
 
-FROM downloader AS D100
+FROM downloader AS downloader-100
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libyuv-1ebf86795cb213a37f06eb1ef3713cff080568ea.tar.gz"
 
-FROM downloader AS D101
+FROM downloader AS downloader-101
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libzip-0.11.2.tar.xz"
 
-FROM downloader AS D102
+FROM downloader AS downloader-102
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/linux-3.4.110.tar.xz"
 
-FROM downloader AS D103
+FROM downloader AS downloader-103
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ltrace-c22d359433b333937ee3d803450dc41998115685.tar.gz"
 
-FROM downloader AS D104
+FROM downloader AS downloader-104
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/LVM2.2.02.132.tgz"
 
-FROM downloader AS D105
+FROM downloader AS downloader-105
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lz4-r123.tar.gz"
 
-FROM downloader AS D106
+FROM downloader AS downloader-106
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzip-1.15.tar.gz"
 
-FROM downloader AS D107
+FROM downloader AS downloader-107
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzo-2.09.tar.gz"
 
-FROM downloader AS D108
+FROM downloader AS downloader-108
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzop-1.03.tar.gz"
 
-FROM downloader AS D109
+FROM downloader AS downloader-109
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/m4-1.4.17.tar.xz"
 
-FROM downloader AS D110
+FROM downloader AS downloader-110
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/madplay-0.15.2b.tar.gz"
 
-FROM downloader AS D111
+FROM downloader AS downloader-111
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mc-4.8.14.tar.xz"
 
-FROM downloader AS D112
+FROM downloader AS downloader-112
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/memstat_1.0.tar.gz"
 
-FROM downloader AS D113
+FROM downloader AS downloader-113
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mmc-utils-d0b46442b50794217e53b2455c1344c548d9d088.tar.gz"
 
-FROM downloader AS D114
+FROM downloader AS downloader-114
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mp4v2-2.0.0.tar.bz2"
 
-FROM downloader AS D115
+FROM downloader AS downloader-115
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpc-1.0.3.tar.gz"
 
-FROM downloader AS D116
+FROM downloader AS downloader-116
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpd-0.19.11.tar.xz"
 
-FROM downloader AS D117
+FROM downloader AS downloader-117
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpfr-3.1.3.tar.xz"
 
-FROM downloader AS D118
+FROM downloader AS downloader-118
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/MPlayer-1.2.tar.xz"
 
-FROM downloader AS D119
+FROM downloader AS downloader-119
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/nano-2.4.2.tar.gz"
 
-FROM downloader AS D120
+FROM downloader AS downloader-120
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ncdu-1.9.tar.gz"
 
-FROM downloader AS D121
+FROM downloader AS downloader-121
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ncurses-5.9.tar.gz"
 
-FROM downloader AS D122
+FROM downloader AS downloader-122
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/nettle-3.1.1.tar.gz"
 
-FROM downloader AS D123
+FROM downloader AS downloader-123
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ntfs-3g_ntfsprogs-2015.3.14.tgz"
 
-FROM downloader AS D124
+FROM downloader AS downloader-124
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opencore-amr-0.1.3.tar.gz"
 
-FROM downloader AS D125
+FROM downloader AS downloader-125
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openjpeg-1.5.2.tar.gz"
 
-FROM downloader AS D126
+FROM downloader AS downloader-126
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openssh-7.1p1.tar.gz"
 
-FROM downloader AS D127
+FROM downloader AS downloader-127
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openssl-1.0.2e.tar.gz"
 
-FROM downloader AS D128
+FROM downloader AS downloader-128
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opkg-v0.3.0.tar.gz"
 
-FROM downloader AS D129
+FROM downloader AS downloader-129
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/oprofile-1.0.0.tar.gz"
 
-FROM downloader AS D130
+FROM downloader AS downloader-130
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opus-1.1.tar.gz"
 
-FROM downloader AS D131
+FROM downloader AS downloader-131
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opusfile-0.6.tar.gz"
 
-FROM downloader AS D132
+FROM downloader AS downloader-132
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/pcre-8.38.tar.bz2"
 
-FROM downloader AS D133
+FROM downloader AS downloader-133
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/pkgconf-0.9.12.tar.bz2"
 
-FROM downloader AS D134
+FROM downloader AS downloader-134
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/popt-1.16.tar.gz"
 
-FROM downloader AS D135
+FROM downloader AS downloader-135
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/Python-2.7.10.tar.xz"
 
-FROM downloader AS D136
+FROM downloader AS downloader-136
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/readline-6.3.tar.gz"
 
-FROM downloader AS D137
+FROM downloader AS downloader-137
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/SDL-1.2.15.tar.gz"
 
-FROM downloader AS D138
+FROM downloader AS downloader-138
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/SDL2-2.0.3.tar.gz"
 
-FROM downloader AS D139
+FROM downloader AS downloader-139
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/socat-2.0.0-b8.tar.bz2"
 
-FROM downloader AS D140
+FROM downloader AS downloader-140
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sox-14.4.2.tar.bz2"
 
-FROM downloader AS D141
+FROM downloader AS downloader-141
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/soxr-0.1.2-Source.tar.xz"
 
-FROM downloader AS D142
+FROM downloader AS downloader-142
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/speex-1.2rc1.tar.gz"
 
-FROM downloader AS D143
+FROM downloader AS downloader-143
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/squashfs4.3.tar.gz"
 
-FROM downloader AS D144
+FROM downloader AS downloader-144
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sshfs-fuse-2.5.tar.gz"
 
-FROM downloader AS D145
+FROM downloader AS downloader-145
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sstrip-20154.tar.gz"
 
-FROM downloader AS D146
+FROM downloader AS downloader-146
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/strace-4.10.tar.xz"
 
-FROM downloader AS D147
+FROM downloader AS downloader-147
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-cedarx-b8f52d913f73720e50d8f1b2f8610467b575dc45.tar.gz"
 
-FROM downloader AS D148
+FROM downloader AS downloader-148
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-mali-d343311efc8db166d8371b28494f0f27b6a58724.tar.gz"
 
-FROM downloader AS D149
+FROM downloader AS downloader-149
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-mali-prop-1c5063f43cdc9de341c0d63b2e3921cab86c7742.tar.gz"
 
-FROM downloader AS D150
+FROM downloader AS downloader-150
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-tools-82b9c656868d99553f11b1c8853ca808c7ce41ae.tar.gz"
 
-FROM downloader AS D151
+FROM downloader AS downloader-151
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/swig-2.0.12.tar.gz"
 
-FROM downloader AS D152
+FROM downloader AS downloader-152
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sysstat-11.0.5.tar.xz"
 
-FROM downloader AS D153
+FROM downloader AS downloader-153
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/tinyalsa-f2a7b6d3d81bd337a540d56704b4aaa7bdb046fe.tar.gz"
 
-FROM downloader AS D154
+FROM downloader AS downloader-154
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/tmux-2.0.tar.gz"
 
-FROM downloader AS D155
+FROM downloader AS downloader-155
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/trace-cmd-trace-cmd-v2.3.2.tar.gz"
 
-FROM downloader AS D156
+FROM downloader AS downloader-156
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/unionfs-1.0.tar.gz"
 
-FROM downloader AS D157
+FROM downloader AS downloader-157
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/util-linux-2.27.1.tar.xz"
 
-FROM downloader AS D158
+FROM downloader AS downloader-158
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/vo-aacenc-0.1.3.tar.gz"
 
-FROM downloader AS D159
+FROM downloader AS downloader-159
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/wireless_tools.30.pre9.tar.gz"
 
-FROM downloader AS D160
+FROM downloader AS downloader-160
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/wpa_supplicant-2.5.tar.gz"
 
-FROM downloader AS D161
+FROM downloader AS downloader-161
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/x264-e86f3a1993234e8f26050c243aa253651200fa6b.tar.gz"
 
-FROM downloader AS D162
+FROM downloader AS downloader-162
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/x265_1.8.tar.gz"
 
-FROM downloader AS D163
+FROM downloader AS downloader-163
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/xz-5.2.2.tar.bz2"
 
-FROM downloader AS D164
+FROM downloader AS downloader-164
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zip30.tgz"
 
-FROM downloader AS D165
+FROM downloader AS downloader-165
 RUN cd "/buildroot-2015.11.1/dl/" && \
     wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zlib-1.2.8.tar.xz"
 
@@ -707,172 +707,172 @@ RUN apt-get update && \
 
 COPY --from=buildroot /buildroot-2015.11.1 /buildroot-2015.11.1
 
-COPY --from=D0 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D1 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D2 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D3 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D4 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D5 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D6 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D7 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D8 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D9 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D10 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D11 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D12 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D13 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D14 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D15 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D16 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D17 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D18 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D19 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D20 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D21 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D22 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D23 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D24 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D25 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D26 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D27 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D28 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D29 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D30 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D31 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D32 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D33 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D34 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D35 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D36 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D37 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D38 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D39 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D40 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D41 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D42 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D43 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D44 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D45 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D46 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D47 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D48 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D49 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D50 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D51 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D52 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D53 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D54 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D55 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D56 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D57 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D58 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D59 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D60 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D61 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D62 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D63 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D64 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D65 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D66 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D67 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D68 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D69 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D70 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D71 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D72 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D73 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D74 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D75 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D76 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D77 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D78 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D79 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D80 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D81 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D82 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D83 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D84 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D85 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D86 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D87 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D88 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D89 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D90 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D91 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D92 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D93 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D94 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D95 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D96 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D97 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D98 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D99 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D100 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D101 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D102 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D103 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D104 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D105 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D106 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D107 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D108 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D109 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D110 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D111 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D112 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D113 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D114 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D115 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D116 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D117 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D118 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D119 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D120 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D121 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D122 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D123 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D124 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D125 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D126 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D127 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D128 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D129 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D130 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D131 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D132 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D133 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D134 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D135 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D136 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D137 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D138 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D139 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D140 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D141 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D142 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D143 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D144 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D145 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D146 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D147 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D148 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D149 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D150 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D151 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D152 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D153 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D154 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D155 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D156 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D157 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D158 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D159 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D160 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D161 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D162 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D163 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D164 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
-COPY --from=D165 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-0 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-1 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-2 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-3 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-4 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-5 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-6 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-7 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-8 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-9 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-10 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-11 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-12 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-13 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-14 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-15 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-16 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-17 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-18 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-19 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-20 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-21 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-22 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-23 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-24 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-25 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-26 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-27 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-28 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-29 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-30 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-31 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-32 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-33 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-34 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-35 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-36 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-37 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-38 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-39 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-40 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-41 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-42 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-43 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-44 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-45 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-46 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-47 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-48 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-49 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-50 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-51 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-52 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-53 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-54 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-55 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-56 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-57 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-58 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-59 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-60 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-61 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-62 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-63 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-64 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-65 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-66 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-67 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-68 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-69 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-70 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-71 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-72 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-73 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-74 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-75 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-76 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-77 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-78 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-79 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-80 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-81 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-82 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-83 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-84 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-85 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-86 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-87 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-88 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-89 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-90 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-91 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-92 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-93 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-94 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-95 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-96 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-97 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-98 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-99 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-100 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-101 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-102 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-103 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-104 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-105 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-106 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-107 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-108 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-109 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-110 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-111 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-112 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-113 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-114 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-115 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-116 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-117 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-118 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-119 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-120 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-121 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-122 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-123 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-124 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-125 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-126 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-127 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-128 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-129 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-130 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-131 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-132 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-133 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-134 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-135 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-136 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-137 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-138 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-139 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-140 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-141 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-142 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-143 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-144 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-145 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-146 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-147 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-148 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-149 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-150 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-151 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-152 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-153 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-154 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-155 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-156 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-157 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-158 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-159 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-160 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-161 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-162 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-163 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-164 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
+COPY --from=downloader-165 /buildroot-2015.11.1/dl/* /buildroot-2015.11.1/dl/
 
 COPY [".config", "/buildroot-2015.11.1/"]
 RUN find /buildroot-2015.11.1 -type f
