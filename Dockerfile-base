@@ -26,176 +26,178 @@ RUN apt-get update && \
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' "/etc/locale.gen" && \
     locale-gen
 
-ADD https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz /
-RUN tar -xzvf /buildroot-2015.11.1.tar.gz -C / && rm /buildroot-2015.11.1.tar.gz
-ADD \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/FreeImage3170.zip \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/LVM2.2.02.132.tgz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/MPlayer-1.2.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/Python-2.7.10.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/SDL-1.2.15.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/SDL2-2.0.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/aespipe-v2.4c.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/alsa-lib-1.0.29.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/alsa-utils-1.0.29.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/audiofile-0.3.6.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/autoconf-2.69.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/automake-1.15.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bc-1.06.95.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/binutils-2.24.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bison-3.0.4.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/boost_1_58_0.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/busybox-1.24.1.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bzip2-1.0.6.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cloog-0.18.4.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cmake-3.3.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cpio-2.12.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cryptsetup-1.6.8.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/curl-7.45.0.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dmalloc-5.5.2.tgz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dosfstools-3.0.28.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dropbear-2015.71.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/duma_2_5_15.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/e2fsprogs-1.42.13.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/e2tools-3158ef18a903ca4a98b8fa220c9fc5c133d8bdf6.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/elfutils-0.161.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/elfutils-portability-0.161.patch \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ethtool-4.2.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/eudev-3.1.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/exfat-utils-1.2.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/expat-2.1.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fakeroot_1.18.4.orig.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fb-test-app-rosetta-1.1.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbgrab-1.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbterm-1.7.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbv-1.0b.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fdk-aac-0.1.4.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ffmpeg-2.8.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/flac-1.3.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/flex-2.5.37.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fontconfig-2.11.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/freetype-2.6.1.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fribidi-0.19.6.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fuse-2.9.4.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fuse-exfat-1.2.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gawk-4.1.3.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gcc-4.9.3.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gdb-7.9.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gettext-0.19.6.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/giflib-5.1.1.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/glib-2.46.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/glibc-2.22.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gmp-6.0.0a.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gnutls-3.3.18.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gperf-3.0.4.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/harfbuzz-1.0.6.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/htop-1.0.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/icu4c-56_1-src.tgz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/input-event-daemon-v0.1.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/iotop-0.6.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ipkg-0.99.163.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/isl-0.14.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/jpegsrc.v9a.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/kexec-tools-2.0.9.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/kmod-20.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lame-3.99.5.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libarchive-3.1.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libass-0.12.3.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libbluray-0.8.1.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libdvdnav-4.2.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libdvdread-4.2.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libebml-1.3.1.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/liberation-fonts-ttf-2.00.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libevdev-1.4.4.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libevent-2.0.22-stable.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libffi-3.2.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libgcrypt-1.6.4.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libgpg-error-1.12.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libical-1.0.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libid3tag-0.15.1b.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libjpeg-turbo-1.4.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmad-0.15.1b.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmatroska-1.4.2.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmodplug-0.8.8.5.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libnl-3.2.27.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libogg-1.3.2.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libpng-1.6.20.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsamplerate-0.1.8.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsilk-4268a02240c35c6055b0f237c46b09b2dcf79e45.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsndfile-1.0.25.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsoundtouch-010a91a59071c7fefd316fca62c0d980ec85b4b1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsquish-1.13.tgz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsvg-0.1.4.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libtheora-1.1.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libtool-2.4.6.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libump-ec0680628744f30b8fac35e41a7bd8e23e59c39f.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libusb-1.0.19.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libvorbis-1.3.5.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libvpx-1.4.0.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libwebp-0.4.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libxml2-2.9.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libyuv-1ebf86795cb213a37f06eb1ef3713cff080568ea.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libzip-0.11.2.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/linux-3.4.110.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ltrace-c22d359433b333937ee3d803450dc41998115685.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lz4-r123.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzip-1.15.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzo-2.09.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzop-1.03.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/m4-1.4.17.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/madplay-0.15.2b.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mc-4.8.14.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/memstat_1.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mmc-utils-d0b46442b50794217e53b2455c1344c548d9d088.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mp4v2-2.0.0.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpc-1.0.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpd-0.19.11.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpfr-3.1.3.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/nano-2.4.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ncdu-1.9.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ncurses-5.9.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/nettle-3.1.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ntfs-3g_ntfsprogs-2015.3.14.tgz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opencore-amr-0.1.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openjpeg-1.5.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openssh-7.1p1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openssl-1.0.2e.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opkg-v0.3.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/oprofile-1.0.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opus-1.1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opusfile-0.6.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/pcre-8.38.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/pkgconf-0.9.12.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/popt-1.16.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/readline-6.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/socat-2.0.0-b8.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sox-14.4.2.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/soxr-0.1.2-Source.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/speex-1.2rc1.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/squashfs4.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sshfs-fuse-2.5.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sstrip-20154.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/strace-4.10.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-cedarx-b8f52d913f73720e50d8f1b2f8610467b575dc45.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-mali-d343311efc8db166d8371b28494f0f27b6a58724.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-mali-prop-1c5063f43cdc9de341c0d63b2e3921cab86c7742.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-tools-82b9c656868d99553f11b1c8853ca808c7ce41ae.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/swig-2.0.12.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sysstat-11.0.5.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/tinyalsa-f2a7b6d3d81bd337a540d56704b4aaa7bdb046fe.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/tmux-2.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/trace-cmd-trace-cmd-v2.3.2.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/unionfs-1.0.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/util-linux-2.27.1.tar.xz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/vo-aacenc-0.1.3.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/wireless_tools.30.pre9.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/wpa_supplicant-2.5.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/x264-e86f3a1993234e8f26050c243aa253651200fa6b.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/x265_1.8.tar.gz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/xz-5.2.2.tar.bz2 \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zip30.tgz \
-  https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zlib-1.2.8.tar.xz \
-  /buildroot-2015.11.1/dl/
+RUN \
+    curl -s "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/buildroot-2015.11.1.tar.gz" | tar -xzvf - -C /
+
+RUN \
+    mkdir -p "/buildroot-2015.11.1/dl/" && \
+    cd "/buildroot-2015.11.1/dl/" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/aespipe-v2.4c.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/alsa-lib-1.0.29.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/alsa-utils-1.0.29.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/audiofile-0.3.6.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/autoconf-2.69.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/automake-1.15.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bc-1.06.95.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/binutils-2.24.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bison-3.0.4.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/boost_1_58_0.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/busybox-1.24.1.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/bzip2-1.0.6.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cloog-0.18.4.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cmake-3.3.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cpio-2.12.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/cryptsetup-1.6.8.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/curl-7.45.0.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dmalloc-5.5.2.tgz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dosfstools-3.0.28.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/dropbear-2015.71.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/duma_2_5_15.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/e2fsprogs-1.42.13.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/e2tools-3158ef18a903ca4a98b8fa220c9fc5c133d8bdf6.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/elfutils-0.161.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/elfutils-portability-0.161.patch" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ethtool-4.2.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/eudev-3.1.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/exfat-utils-1.2.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/expat-2.1.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fakeroot_1.18.4.orig.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fb-test-app-rosetta-1.1.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbgrab-1.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbterm-1.7.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fbv-1.0b.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fdk-aac-0.1.4.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ffmpeg-2.8.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/flac-1.3.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/flex-2.5.37.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fontconfig-2.11.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/FreeImage3170.zip" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/freetype-2.6.1.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fribidi-0.19.6.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fuse-2.9.4.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/fuse-exfat-1.2.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gawk-4.1.3.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gcc-4.9.3.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gdb-7.9.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gettext-0.19.6.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/giflib-5.1.1.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/glib-2.46.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/glibc-2.22.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gmp-6.0.0a.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gnutls-3.3.18.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/gperf-3.0.4.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/harfbuzz-1.0.6.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/htop-1.0.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/icu4c-56_1-src.tgz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/input-event-daemon-v0.1.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/iotop-0.6.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ipkg-0.99.163.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/isl-0.14.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/jpegsrc.v9a.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/kexec-tools-2.0.9.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/kmod-20.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lame-3.99.5.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libarchive-3.1.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libass-0.12.3.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libbluray-0.8.1.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libdvdnav-4.2.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libdvdread-4.2.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libebml-1.3.1.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/liberation-fonts-ttf-2.00.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libevdev-1.4.4.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libevent-2.0.22-stable.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libffi-3.2.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libgcrypt-1.6.4.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libgpg-error-1.12.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libical-1.0.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libid3tag-0.15.1b.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libjpeg-turbo-1.4.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmad-0.15.1b.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmatroska-1.4.2.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libmodplug-0.8.8.5.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libnl-3.2.27.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libogg-1.3.2.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libpng-1.6.20.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsamplerate-0.1.8.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsilk-4268a02240c35c6055b0f237c46b09b2dcf79e45.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsndfile-1.0.25.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsoundtouch-010a91a59071c7fefd316fca62c0d980ec85b4b1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsquish-1.13.tgz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libsvg-0.1.4.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libtheora-1.1.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libtool-2.4.6.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libump-ec0680628744f30b8fac35e41a7bd8e23e59c39f.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libusb-1.0.19.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libvorbis-1.3.5.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libvpx-1.4.0.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libwebp-0.4.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libxml2-2.9.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libyuv-1ebf86795cb213a37f06eb1ef3713cff080568ea.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/libzip-0.11.2.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/linux-3.4.110.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ltrace-c22d359433b333937ee3d803450dc41998115685.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/LVM2.2.02.132.tgz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lz4-r123.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzip-1.15.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzo-2.09.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/lzop-1.03.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/m4-1.4.17.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/madplay-0.15.2b.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mc-4.8.14.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/memstat_1.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mmc-utils-d0b46442b50794217e53b2455c1344c548d9d088.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mp4v2-2.0.0.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpc-1.0.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpd-0.19.11.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/mpfr-3.1.3.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/MPlayer-1.2.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/nano-2.4.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ncdu-1.9.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ncurses-5.9.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/nettle-3.1.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/ntfs-3g_ntfsprogs-2015.3.14.tgz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opencore-amr-0.1.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openjpeg-1.5.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openssh-7.1p1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/openssl-1.0.2e.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opkg-v0.3.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/oprofile-1.0.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opus-1.1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/opusfile-0.6.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/pcre-8.38.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/pkgconf-0.9.12.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/popt-1.16.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/Python-2.7.10.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/readline-6.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/SDL-1.2.15.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/SDL2-2.0.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/socat-2.0.0-b8.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sox-14.4.2.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/soxr-0.1.2-Source.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/speex-1.2rc1.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/squashfs4.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sshfs-fuse-2.5.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sstrip-20154.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/strace-4.10.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-cedarx-b8f52d913f73720e50d8f1b2f8610467b575dc45.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-mali-d343311efc8db166d8371b28494f0f27b6a58724.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-mali-prop-1c5063f43cdc9de341c0d63b2e3921cab86c7742.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sunxi-tools-82b9c656868d99553f11b1c8853ca808c7ce41ae.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/swig-2.0.12.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/sysstat-11.0.5.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/tinyalsa-f2a7b6d3d81bd337a540d56704b4aaa7bdb046fe.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/tmux-2.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/trace-cmd-trace-cmd-v2.3.2.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/unionfs-1.0.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/util-linux-2.27.1.tar.xz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/vo-aacenc-0.1.3.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/wireless_tools.30.pre9.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/wpa_supplicant-2.5.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/x264-e86f3a1993234e8f26050c243aa253651200fa6b.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/x265_1.8.tar.gz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/xz-5.2.2.tar.bz2" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zip30.tgz" && \
+    curl -O "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/zlib-1.2.8.tar.xz"
 
 COPY [".config", "/buildroot-2015.11.1/"]
 
