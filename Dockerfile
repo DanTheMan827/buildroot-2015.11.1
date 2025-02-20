@@ -2,7 +2,7 @@ FROM dantheman827/buildroot-2015.11.1:latest-base
 FROM dantheman827/buildroot-2015.11.1:latest-base
 RUN cd "/buildroot-2015.11.1" && rm -rf "output/build" "output/images" "dl"
 
-FROM debian:latest as basebuilder
+FROM debian:latest AS basebuilder
 COPY --from=0 "/buildroot-2015.11.1/output/build/sdl2-2.0.3/sdl2-config" "/buildroot-2015.11.1/output/host/usr/bin/sdl2-config"
 COPY --from=1 "/buildroot-2015.11.1" "/buildroot-2015.11.1"
 
@@ -68,7 +68,7 @@ COPY "gl_headers" "/buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnue
 RUN mkdir -p /staging/usr/include/ /staging/usr/lib/
 
 # Install zstd
-FROM basebuilder as zstd
+FROM basebuilder AS zstd
 RUN git clone "https://github.com/facebook/zstd.git" "/tmp/zstd" && \
     cd "/tmp/zstd/lib" && \
     make install CC=arm-buildroot-linux-gnueabihf-gcc "DESTDIR=$SYSROOT" PREFIX=/usr "-j$(grep -c ^processor /proc/cpuinfo)" && \
@@ -77,7 +77,7 @@ RUN git clone "https://github.com/facebook/zstd.git" "/tmp/zstd" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install gulrak/filesystem
-FROM basebuilder as gulrakfs
+FROM basebuilder AS gulrakfs
 RUN cd /tmp && \
     git clone https://github.com/gulrak/filesystem.git filesystem && \
     cp -r filesystem/include/ghc "$SYSROOT/usr/include" && \
@@ -87,7 +87,7 @@ RUN cd /tmp && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install boost
-FROM basebuilder as boost
+FROM basebuilder AS boost
 COPY --from=zstd /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 RUN wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/buildroot-dl/boost_1_75_0.tar.gz" -q -O - | tar -xzvf - -C "/tmp/" && \
     cd "/tmp/boost_1_75_0" && \
@@ -100,7 +100,7 @@ RUN wget "https://github.com/DanTheMan827/buildroot-2015.11.1/releases/download/
     chmod -R a=u "/staging/" && find /staging/
 
 # Install gl4es
-FROM basebuilder as gl4es
+FROM basebuilder AS gl4es
 RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -q -O - | tar -xzvf - -C /tmp && \
     mkdir -p /tmp/gl4es-1.1.4/build/ && \
     cd /tmp/gl4es-1.1.4/build/ && \
@@ -118,7 +118,7 @@ RUN wget "https://github.com/ptitSeb/gl4es/archive/v1.1.4.tar.gz" -q -O - | tar 
     chmod -R a=u "/staging/" && find /staging/
 
 # Install libGLU
-FROM basebuilder as glu
+FROM basebuilder AS glu
 COPY --from=gl4es /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 RUN git clone "https://github.com/ptitSeb/GLU.git" "/tmp/GLU" && \
     cd /tmp/GLU && \
@@ -133,7 +133,7 @@ RUN git clone "https://github.com/ptitSeb/GLU.git" "/tmp/GLU" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install hidapi
-FROM basebuilder as hidapi
+FROM basebuilder AS hidapi
 RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
     cd "/tmp/hidapi" && \
     ./bootstrap && \
@@ -145,7 +145,7 @@ RUN git clone "https://github.com/signal11/hidapi.git" "/tmp/hidapi" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install dbus
-FROM basebuilder as dbus
+FROM basebuilder AS dbus
 RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/dbus-1.12.16/" && \
     ./configure CC=arm-buildroot-linux-gnueabihf-gcc "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" && \
@@ -156,7 +156,7 @@ RUN wget "https://dbus.freedesktop.org/releases/dbus/dbus-1.12.16.tar.gz" -q -O 
     chmod -R a=u "/staging/" && find /staging/
 
 # Install bluez
-FROM basebuilder as bluez
+FROM basebuilder AS bluez
 COPY --from=dbus /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 COPY "patches/" "/patches"
 RUN git clone "https://github.com/bluez/bluez.git" "/tmp/bluez" && \
@@ -172,7 +172,7 @@ RUN git clone "https://github.com/bluez/bluez.git" "/tmp/bluez" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install attr
-FROM basebuilder as attr
+FROM basebuilder AS attr
 RUN wget "https://download-mirror.savannah.gnu.org/releases/attr/attr-2.4.48.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/attr-2.4.48/" && \
     ./configure "--prefix=/usr" "--disable-static" "--host=arm-buildroot-linux-gnueabihf" && \
@@ -183,7 +183,7 @@ RUN wget "https://download-mirror.savannah.gnu.org/releases/attr/attr-2.4.48.tar
     chmod -R a=u "/staging/" && find /staging/
 
 # Install Freetype
-FROM basebuilder as freetype
+FROM basebuilder AS freetype
 RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
     cd "/tmp/freetype-2.10.2/" && \
     ./configure "--prefix=/usr" "--host=arm-buildroot-linux-gnueabihf" --enable-freetype-config && \
@@ -195,7 +195,7 @@ RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.ta
     chmod -R a=u "/staging/" && find /staging/
 
 # Install SDL2
-FROM basebuilder as sdl2
+FROM basebuilder AS sdl2
 COPY "patches/" "/patches"
 RUN cd /tmp && \
     git clone "https://github.com/sdl-mirror/SDL.git" SDL && \
@@ -232,7 +232,7 @@ RUN cd /tmp && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install SDL2 Mixer
-FROM sdl2 as sdl_mixer
+FROM sdl2 AS sdl_mixer
 RUN rm -rf "/staging/" && \
     mkdir -p /staging/usr/include/ /staging/usr/lib/ && \
     wget "https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.4.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
@@ -245,7 +245,7 @@ RUN rm -rf "/staging/" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install SDL2 Image
-FROM sdl2 as sdl_image
+FROM sdl2 AS sdl_image
 RUN rm -rf "/staging/" && \
     mkdir -p /staging/usr/include/ /staging/usr/lib/ && \
     wget "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
@@ -258,7 +258,7 @@ RUN rm -rf "/staging/" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install SDL2 Net
-FROM sdl2 as sdl_net
+FROM sdl2 AS sdl_net
 RUN rm -rf "/staging/" && \
     mkdir -p /staging/usr/include/ /staging/usr/lib/ && \
     wget "https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.tar.gz" -q -O - | tar -xzvf - -C "/tmp" && \
@@ -271,7 +271,7 @@ RUN rm -rf "/staging/" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install SDL2_ttf
-FROM sdl2 as sdl_ttf
+FROM sdl2 AS sdl_ttf
 COPY --from=freetype /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 RUN rm -rf "/staging/" && \
     mkdir -p /staging/usr/include/ /staging/usr/lib/ && \
