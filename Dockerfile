@@ -194,6 +194,19 @@ RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.ta
     rm -rf "/tmp/freetype-2.10.2/" && \
     chmod -R a=u "/staging/" && find /staging/
 
+FROM basebuilder AS miniupnpc
+RUN git clone "https://github.com/miniupnp/miniupnp.git" "/tmp/miniupnp" && \
+    cd /tmp/miniupnp && \
+    git checkout miniupnpd_2_3_11 && \
+    cd miniupnpc && \
+    mkdir -p "/staging/usr" && \
+    CC=arm-buildroot-linux-gnueabihf-gcc make "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    INSTALLPREFIX="$SYSROOT/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    INSTALLPREFIX="/staging/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    cd "/tmp" && \
+    rm -rf "/tmp/miniupnp"
+    chmod -R a=u "/staging/" && find /staging/
+
 # Install SDL2
 FROM basebuilder AS sdl2
 COPY "patches/" "/patches"
@@ -296,6 +309,7 @@ COPY --from=dbus /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-li
 COPY --from=bluez /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 COPY --from=attr /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 COPY --from=freetype /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
+COPY --from=miniupnp /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 COPY --from=sdl2 /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 COPY --from=sdl_mixer /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
 COPY --from=sdl_image /staging/ /buildroot-2015.11.1/output/host/usr/arm-buildroot-linux-gnueabihf/sysroot/
