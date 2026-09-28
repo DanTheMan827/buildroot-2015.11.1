@@ -204,7 +204,7 @@ RUN git clone "https://github.com/miniupnp/miniupnp.git" "/tmp/miniupnp" && \
     INSTALLPREFIX="$SYSROOT/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
     INSTALLPREFIX="/staging/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
     cd "/tmp" && \
-    rm -rf "/tmp/miniupnp"
+    rm -rf "/tmp/miniupnp" && \
     chmod -R a=u "/staging/" && find /staging/
 
 # Install SDL2
