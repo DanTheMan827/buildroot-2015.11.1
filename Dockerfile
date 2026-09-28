@@ -200,9 +200,10 @@ RUN git clone "https://github.com/miniupnp/miniupnp.git" "/tmp/miniupnp" && \
     git checkout miniupnpd_2_3_11 && \
     cd miniupnpc && \
     mkdir -p "/staging/usr" && \
-    CC=arm-buildroot-linux-gnueabihf-gcc make "-j$(grep -c ^processor /proc/cpuinfo)" && \
-    CC=arm-buildroot-linux-gnueabihf-gcc INSTALLPREFIX="$SYSROOT/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
-    CC=arm-buildroot-linux-gnueabihf-gcc INSTALLPREFIX="/staging/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    export CC=arm-buildroot-linux-gnueabihf-gcc && \
+    make "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    INSTALLPREFIX="$SYSROOT/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
+    INSTALLPREFIX="/staging/usr" make install "-j$(grep -c ^processor /proc/cpuinfo)" && \
     cd "/tmp" && \
     rm -rf "/tmp/miniupnp" && \
     chmod -R a=u "/staging/" && find /staging/
