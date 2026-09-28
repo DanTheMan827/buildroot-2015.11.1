@@ -194,7 +194,7 @@ RUN wget "https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.ta
     rm -rf "/tmp/freetype-2.10.2/" && \
     chmod -R a=u "/staging/" && find /staging/
 
-FROM basebuilder AS miniupnpc
+FROM basebuilder AS miniupnp
 RUN git clone "https://github.com/miniupnp/miniupnp.git" "/tmp/miniupnp" && \
     cd /tmp/miniupnp && \
     git checkout miniupnpd_2_3_11 && \
